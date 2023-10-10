@@ -10,8 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "parsing.h"
-#include "cleanup.h"
+#include <minishell.h>
 
 t_commands	*lst_new_command(bool pipe)
 {

@@ -11,14 +11,10 @@
 /* ************************************************************************** */
 
 #include "minishell.h"
-#include "error.h"
-#include "lexer.h"
-#include "structs.h"
-#include "loop.h"
 #include <errno.h>
 #include <stdlib.h>
 #include <string.h>
-#include "builtins.h"
+//#include "builtins.h"
 #include <fcntl.h>
 
 int g_exit_code = 0;

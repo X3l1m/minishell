@@ -10,10 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "parsing.h"
-#include "expander.h"
-#include "lexer.h"
-#include "cleanup.h"
+#include <minishell.h>
 
 bool	space_present(char *string)
 {

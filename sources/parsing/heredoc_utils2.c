@@ -10,8 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "heredoc.h"
-#include "expander.h"
+#include <minishell.h>
 
 char	*reform_string(char **words)
 {

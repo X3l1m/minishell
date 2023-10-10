@@ -10,8 +10,7 @@
 	/*                                                                            */
 	/* ************************************************************************** */
 
-	#include "lexer.h"
-	#include <stdio.h>
+	#include <minishell.h>
 
 	int	set_status(int status, char *str, int i)
 	{

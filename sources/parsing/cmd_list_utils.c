@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "parsing.h"
+#include <minishell.h>
 
 void	init_cmd(t_commands **cmd)
 {

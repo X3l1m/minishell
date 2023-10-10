@@ -10,10 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "expander.h"
-#include <unistd.h>
-#include <stdio.h>
-#include <stdlib.h>
+#include <minishell.h>
 
 void	copy_new_var(char *new, char *var, int *j)
 {

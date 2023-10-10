@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-int	ft_is_negative(unsigned long n)
+int	ft_is_negative(long n)
 {
 	if (n < 0)
 		return (1);

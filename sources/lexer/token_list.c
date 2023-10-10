@@ -10,8 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "lexer.h"
-#include "cleanup.h"
+#include <minishell.h>
 
 t_token	*new_token(char *str, char *str_cpy, int type, int status)
 {

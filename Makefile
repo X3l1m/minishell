@@ -87,7 +87,8 @@ FILES =	$(MAIN_DF) $(LEXER_DF) $(EXPANDER_DF) $(PARSING_DF) $(UTILS_DF) $(SIGNAL
 SOURCES = $(addprefix $(SOURCES_DIR), $(FILES))
 
 #INCLUDES = includes -I/Users/rmaes/.brew/opt/readline/include
-MAC_INCLUDES = includes -I/opt/homebrew/opt/readline/include
+MAC_INCLUDES = includes -lreadline -lhistory
+#includes -I/opt/homebrew/opt/readline/include
 
 OBJECTS_DIR = objects/
 OBJECTS = $(addprefix $(OBJECTS_DIR), $(FILES:.c=.o))

@@ -10,10 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "expander.h"
-#include "cleanup.h"
-#include "structs.h"
-#include <stdio.h>
+#include <minishell.h>
 
 int	var_length(char *string)
 {

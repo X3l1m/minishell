@@ -10,8 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "parsing.h"
-#include "error.h"
+#include <minishell.h>
 
 static void	handle_trunc(t_data_fd *io, char *filename, char *o_filename)
 {

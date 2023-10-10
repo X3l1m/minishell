@@ -10,13 +10,9 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
-#include "cleanup.h"
-#include <stdbool.h>
-#include <stdlib.h>
-#include <stdio.h>
+#include <minishell.h>
 
-void	error(char *errmsg)
+void	error_mini(char *errmsg)
 {
 	ft_putstr_fd("Error\n", 2);
 	if (errno == 0)

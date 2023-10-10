@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "parsing.h"
+#include <minishell.h>
 
 char	**merge_into_array(int i, char **words, t_commands *cmd, t_token *temp)
 {

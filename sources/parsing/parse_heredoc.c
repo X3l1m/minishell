@@ -10,9 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "heredoc.h"
-#include "parsing.h"
-#include "signals.h"
+#include <minishell.h>
 
 bool	fill_heredoc(t_data *data, t_data_fd *io, int fd)
 {

@@ -16,7 +16,7 @@ void	ft_null_array(void *array, int len)
 	int	*p;
 
 	i = 0;
-	p = &array[0];
+	p = array;
 	while (i < len)
 	{
 		p[i] = 0;

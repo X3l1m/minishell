@@ -10,8 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "signals.h"
-#include "error.h"
+#include <minishell.h>
 
 /*Resets the readline user input prompt*/
 void	reset(int	temp)

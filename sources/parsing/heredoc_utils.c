@@ -10,9 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "heredoc.h"
-#include "expander.h"
-#include "error.h"
+#include <minishell.h>
 
 char	*get_heredoc_name(void)
 {

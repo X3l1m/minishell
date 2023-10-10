@@ -10,8 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "expander.h"
-#include "cleanup.h"
+#include <minishell.h>
 
 void	change_status_quote(t_token **list, int *i)
 {

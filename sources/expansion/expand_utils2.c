@@ -10,10 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "expander.h"
-#include <stdlib.h>
-#include <stdio.h>
-#include <stdbool.h>
+#include <minishell.h>
 
 char	*id_variable(char *string)
 {

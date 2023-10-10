@@ -10,9 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "lexer.h"
-#include "error.h"
-#include "structs.h"
+#include <minishell.h>
 
 static void	var_check(t_token **node)
 {

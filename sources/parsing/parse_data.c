@@ -10,8 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "parsing.h"
-#include <stdio.h>
+#include <minishell.h>
 
 void	handle_pipe(t_commands **cmds, t_token **list)
 {

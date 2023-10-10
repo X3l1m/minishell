@@ -10,12 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "error.h"
-#include "expander.h"
-#include "minishell.h"
-#include "cleanup.h"
-#include <stdio.h>
-#include <stdio.h>
+#include <minishell.h>
 
 void	update_status(t_token **node, char c)
 {

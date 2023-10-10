@@ -10,12 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "lexer.h"
-#include "expander.h"
-#include "parsing.h"
-#include <stdio.h>
-#include <readline/readline.h>
-#include <readline/history.h>
+#include <minishell.h>
 
 void	testing_purposes(t_commands *cmd)
 {

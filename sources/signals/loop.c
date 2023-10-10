@@ -10,13 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/minishell.h"
-#include "../includes/lexer.h"
-#include "../includes/structs.h"
-#include "../includes/loop.h"
-#include "signals.h"
-#include "cleanup.h"
-#include "error.h"
+#include <minishell.h>
 
 int	mini_loop(t_data *data)
 {

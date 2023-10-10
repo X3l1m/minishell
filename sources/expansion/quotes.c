@@ -10,8 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "expander.h"
-#include <stdlib.h>
+#include <minishell.h>
 
 /*figure this out, something aint right*/
 int	count_length(char *string, int count, int i)

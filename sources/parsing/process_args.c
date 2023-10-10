@@ -10,8 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "parsing.h"
-#include "cleanup.h"
+#include <minishell.h>
 
 int	count_args(t_token *list)
 {

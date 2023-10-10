@@ -10,8 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "lexer.h"
-#include "error.h"
+#include <minishell.h>
 
 int	save_word(t_token **lst, char *str, int index, int start)
 {

@@ -10,8 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "parsing.h"
-#include "cleanup.h"
+#include <minishell.h>
 
 char	*join_str(char *str, char *add)
 {

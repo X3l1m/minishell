@@ -10,8 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "parsing.h"
-#include "error.h"
+#include <minishell.h>
 
 bool	remove_old_ref(t_data_fd *io, bool infile)
 {

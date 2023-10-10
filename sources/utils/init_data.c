@@ -10,9 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
-#include "error.h"
-#include "structs.h"
+#include <minishell.h>
 
 void	init_data_fd(t_commands *cmd)
 {
