@@ -14,15 +14,21 @@
 
 int	mini_loop(t_data *data)
 {
-	while (true)
+	while (1)
 	{
 		set_signals_interactive();
-		data->user_input = readline("Minishell>$");
+		data->user_input = readline("\033[0;35mMinishell$\033[0m ");
 		set_signals_noninteractive();
-		if (data->user_input[0] == 'x')
-			break ;
 		if (parse_input_str(data) == true)
 			printf("happy :D\n");
+		// printf("%s\n", data->cmd->args[1]);
+ 		printf("\033[0;32m");
+		if (data->user_input[0])
+			executor(data->cmd, data->env);
+		printf("\033[0m");
+		// printf("%s\n", pathf(data->cmd->com, env));
+		//printf("\033[32mloop:%s\033[0m\n", data->cmd->args[1]);
+		// printf("loop:%d\n", data->cmd->fd_out);
 		free_data(data, false);
 	}
 	return (0);

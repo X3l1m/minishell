@@ -45,7 +45,7 @@ char	**merge_strings(char **words, t_commands *cmd, t_token **list, int size)
 		i++;
 		temp = temp->next;
 	}
-	words[i] = "\0";
+	words[i] = NULL;
 	return (words);
 }
 
@@ -93,7 +93,7 @@ bool	create_args_cmd(t_token **list, t_commands *cmd)
 	if (!cmd->args)
 		return (1);
 	temp = *list;
-	cmd->args[i] = ft_strdup(cmd->cmd);
+	cmd->args[i] = ft_strdup(cmd->com);
 	i++;
 	while (temp->type == WORD || temp->type == VAR)
 	{
@@ -108,7 +108,7 @@ bool	create_args_cmd(t_token **list, t_commands *cmd)
 
 bool	process_args(t_token **list, t_commands *cmd)
 {
-	if (!ft_strcmp(cmd->cmd, "echo"))
+	if (!ft_strcmp(cmd->com, "echo"))
 	{
 		printf("echo found\n");
 		if (!cmd->args)

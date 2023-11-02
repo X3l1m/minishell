@@ -1,27 +1,9 @@
 #include <stdio.h>
-#include <stdlib.h>
+#include <errno.h>
 #include <string.h>
-#include <readline/readline.h>
-#include <readline/history.h>
 
-int main()
+int main(int argc, char const *argv[])
 {
-	char *input;
-
-	while (1)
-	{
-		input = readline("Girişinizi girin: "); // Kullanıcıdan girdi al
-		if (!strcmp(input, "sil"))
-		{
-			rl_clear_history(); // Komut geçmişini temizle
-			printf("Komut geçmişi temizlendi.\n");
-		}
-		else if (input)
-		{
-			printf("Girdiniz: %s\n", input);
-			add_history(input); // Girdiyi komut geçmişine ekle
-			free(input); // Belleği serbest bırak
-		}
-	}
+	strerror(4);
 	return 0;
 }

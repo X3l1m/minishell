@@ -24,6 +24,7 @@
 # include <unistd.h>
 # include <limits.h>
 # include <signal.h>
+# include <sys/wait.h>
 # include <fcntl.h>
 # include <readline/readline.h>
 # include <readline/history.h>
@@ -34,7 +35,6 @@
 # define END_STR		" \t\r\n\v\f<>|"
 # define DELIMS			" \t\r\n\v\f"
 # define SUCCES			0
-# define SUCCESS		0
 # define FAILURE		1
 
 extern int		g_exit_code;
@@ -47,8 +47,8 @@ typedef enum e_token_type
 	PIPE,
 	INPUT,
 	TRUNC,
-	HEREDOC,
-	APPEND,
+	HEREDOC,//<<
+	APPEND, //>> add to file
 	END
 }	t_token_type;
 
@@ -83,9 +83,9 @@ typedef struct s_data_fd
 
 typedef struct s_commands
 {
-	char				*cmd;
+	char				*com;
 	char				**args;
-	int		fd_out;
+	int					fd_check;
 	t_data_fd			*fd_data;
 	bool				pipe;
 	struct s_commands	*next;
@@ -100,31 +100,35 @@ typedef struct s_data
 	t_commands	*cmd;
 }		t_data;
 
-bool	init_data(t_data *data, char **env);
-void	init_data_fd(t_commands *cmd);
+
+// executiom
+int		executor(t_commands *cmd, t_dllist *env);
+char	*pathf(char *com, t_dlnode *env);
+int		cd_com(t_commands *cmd);
+int		echo_com(t_commands *cmd);
+int		pwd_com(void);
+int		builtin_com(t_commands *cmd, t_dllist *env);
+void	err_msg(char *com, char *msg);
+
+bool		init_data(t_data *data, char **env);
+void		init_data_fd(t_commands *cmd);
 
 
-int		mini_loop(t_data *data);
+int			mini_loop(t_data *data);
 
-/*Functions*/
 void		exit_ms(t_data *data, int num);
-t_token		init_tkn(void);
-void		check_token(char *string);
+
 bool		init_data(t_data *data, char **env);
 
-/*utils*/
-void		null_exit(void);
-void		*null_check(void *ptr);
-
 //free
-void	free_pointer(void *pointer);
-void	free_data_fd(t_data_fd *io);
-void	free_data(t_data *data, bool clear_all);
-void	free_str_arr(char **arr);
-char	*join_str(char *str, char *add);
-void	lst_clear_tkn(t_token **list, void (*del)(void *));
-void	lst_delone_cmd(t_commands *list, void (*del)(void *));
-void	lst_clear_cmd(t_commands **list, void (*del)(void *));
+void		free_pointer(void *pointer);
+void		free_data_fd(t_data_fd *io);
+void		free_data(t_data *data, bool clear_all);
+void		free_str_arr(char **arr);
+char		*join_str(char *str, char *add);
+void		lst_clear_tkn(t_token **list, void (*del)(void *));
+void		lst_delone_cmd(t_commands *list, void (*del)(void *));
+void		lst_clear_cmd(t_commands **list, void (*del)(void *));
 void		set_signals_interactive(void);
 void		set_signals_noninteractive(void);
 bool		parse_input_str(t_data *data);
@@ -171,35 +175,33 @@ char		*merge_vars(t_token **list);
 void		remove_empty_vars(t_token **list);
 int			count_e_args(t_token *list);
 void		init_cmd(t_commands **cmd);
-//int		mini_loop(void);
 
-void	parse_heredoc(t_data *data, t_commands **last_cmd, t_token **list);
-char	*get_heredoc_name(void);
-char	*get_delim_hd(char *delim, bool	*quotes);
-bool	check_line_hd(t_data *data, t_data_fd *io, char **input, bool *ret);
-char	*reform_string(char **words);
-bool	next_char_sep(char c);
-bool	var_between_quotes(char *string, int i);
-char	*replace_str_hd(char *string, char *var, int index);
-char	*get_val(t_data *data, t_token *temp, char *string);
-bool	remove_old_ref(t_data_fd *io, bool infile);
-int		expand_var(t_data *data, t_token **list);
-void	replace_var(t_token **list, char *var, int index);
-int		var_length(char *string);
-char	*get_new_string(char *old, char *var, int len, int index);
-bool	handle_quotes(t_data *data);
-bool	change_status(t_token **list, int i);
-void	change_status_quote(t_token **list, int *i);
-bool	change_status_default(t_token **list, int *i);
-void	sort_strings(t_token **list, char *new);
-char	*id_variable(char *string);
-bool	valid_var(t_data *data, char *var);
-char	*get_value(t_data *data, t_token *temp, char *string);
+void		parse_heredoc(t_data *data, t_commands **last_cmd, t_token **list);
+char		*get_heredoc_name(void);
+char		*get_delim_hd(char *delim, bool	*quotes);
+bool		check_line_hd(t_data *data, t_data_fd *io, char **input, bool *ret);
+char		*reform_string(char **words);
+bool		next_char_sep(char c);
+bool		var_between_quotes(char *string, int i);
+char		*replace_str_hd(char *string, char *var, int index);
+char		*get_val(t_data *data, t_token *temp, char *string);
+bool		remove_old_ref(t_data_fd *io, bool infile);
+int			expand_var(t_data *data, t_token **list);
+void		replace_var(t_token **list, char *var, int index);
+int			var_length(char *string);
+char		*get_new_string(char *old, char *var, int len, int index);
+bool		handle_quotes(t_data *data);
+bool		change_status(t_token **list, int i);
+void		change_status_quote(t_token **list, int *i);
+bool		change_status_default(t_token **list, int *i);
+void		sort_strings(t_token **list, char *new);
+char		*id_variable(char *string);
+bool		valid_var(t_data *data, char *var);
 
 /*Functions*/
-void	error_mini(char *errmsg);
-bool	print_error_msg(char *str);
-int		cmd_err_msg(char *command, char *info, char *msg, int err);
+void		error_mini(char *errmsg);
+bool		print_error_msg(char *str);
+int			cmd_err_msg(char *command, char *info, char *msg, int err);
 
 t_dllist	*envcpy(char **envp);
 int			envsearch(t_dllist *env, char *var);

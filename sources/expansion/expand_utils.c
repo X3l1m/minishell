@@ -88,11 +88,7 @@ void	replace_var(t_token **list, char *var, int index)
 {
 	if (var == NULL)
 	{
-		if (erase_variable(list, (*list)->string, index) == false)
-		{
-			free_pointer(var);
-			return ;
-		}
+		(*list)->string[0] = 0;
 	}
 	else
 	{

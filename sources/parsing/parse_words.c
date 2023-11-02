@@ -38,7 +38,7 @@ void	cmd_split_var(t_commands *cmd, char *string)
 	words = ft_split(string, ' ');
 	if (!words)
 		return ;
-	cmd->cmd = ft_strdup(words[0]);
+	cmd->com = ft_strdup(words[0]);
 	if (words[1])
 		new = new_token(ft_strdup(words[1]), NULL, WORD, DEFAULT);
 	temp = new;
@@ -61,14 +61,14 @@ void	parse_word(t_commands **cmd, t_token **list)
 	while (temp->type == WORD || temp->type == VAR)
 	{
 		last = lst_last_cmd(*cmd);
-		printf("so far so good\n");
+		// printf("so far so good\n");
 		if (temp->prev == NULL || (temp->prev && temp->prev->type == PIPE)
-			|| last->cmd == NULL)
+			|| last->com == NULL)
 		{
 			if (temp->type == VAR && space_present(temp->string))
 				cmd_split_var(last, temp->string);
 			else
-				last->cmd = ft_strdup(temp->string);
+				last->com = ft_strdup(temp->string);
 			temp = temp->next;
 		}
 		else

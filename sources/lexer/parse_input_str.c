@@ -22,8 +22,8 @@ void	testing_purposes(t_commands *cmd)
 	printf("testing the commands output\n");
 	while (test)
 	{
-		if (test->cmd)
-			printf("Command is %s\n", test->cmd);
+		if (test->com)
+			printf("Command is %s\n", test->com);
 		if (test->args && test->pipe == false)
 		{
 			printf("Args are ");
@@ -60,7 +60,6 @@ bool	is_space(char *str)
 bool	parse_input_str(t_data *data)
 {
 	t_token	*temp;
-
 	if (data->user_input == NULL)
 		exit(42);
 	else if (ft_strcmp(data->user_input, "\0") == 0)
@@ -75,14 +74,6 @@ bool	parse_input_str(t_data *data)
 	if (check_for_var(&data->token) == false)
 		return (false);
 	expand_var(data, &data->token);
-	temp = data->token;
-	while (temp->next != NULL)
-	{
-		printf("string in this one is %s\n", temp->string);
-		printf("type in this one is %u\n", temp->type);
-		temp = temp->next;
-	}
 	parse_data(data, data->token);
-	//executor(data->cmd, data->env);
 	return (true);
 }

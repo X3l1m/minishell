@@ -31,7 +31,7 @@ char	**merge_into_array(int i, char **words, t_commands *cmd, t_token *temp)
 		j++;
 		temp = temp->next;
 	}
-	words[j] = "\0";
+	words[j] = NULL;
 	return (words);
 }
 
@@ -56,7 +56,7 @@ int	add_args_ecmd(t_token **list, t_commands *cmd)
 	cmd->args = words;
 	while (temp->type == WORD || temp->type == VAR)
 		temp = temp->next;
-	cmd->args[i] = "\0";
+	cmd->args[i] = NULL;
 	(*list) = temp;
 	return (0);
 }

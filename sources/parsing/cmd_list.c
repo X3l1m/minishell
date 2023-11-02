@@ -53,8 +53,8 @@ t_commands	*lst_last_cmd(t_commands *list)
 
 void	lst_delone_cmd(t_commands *list, void (*del)(void *))
 {
-	if (list->cmd)
-		(*del)(list->cmd);
+	if (list->com)
+		(*del)(list->com);
 	if (list->args)
 		free_str_arr(list->args);
 	if (list->fd_data)

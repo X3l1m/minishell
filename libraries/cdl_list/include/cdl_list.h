@@ -36,6 +36,7 @@ typedef struct s_dllist
 	size_t		listlen;
 	t_dlnode	*head;
 	t_dlnode	*current;
+	char		**list;
 }				t_dllist;
 
 // add new node NODE to the back of LIST. If LIST is empty, it sets NODE as head

@@ -29,7 +29,7 @@ int	save_word(t_token **lst, char *str, int index, int start)
 	}
 	word[i] = '\0';
 	lst_add_back_tkn(lst, new_token(word, ft_strdup(word), WORD, DEFAULT));
-	return (SUCCESS);
+	return (SUCCES);
 }
 
 int	save_seperator(t_token **lst, char *str, int index, int type)

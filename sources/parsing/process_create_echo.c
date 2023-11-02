@@ -98,7 +98,7 @@ int	create_args_ecmd(t_token **list, t_commands *cmd)
 	cmd->args = malloc(sizeof(char *) * (count + 2));
 	if (!cmd->args)
 		return (1);
-	cmd->args[0] = ft_strdup(cmd->cmd);
+	cmd->args[0] = ft_strdup(cmd->com);
 	while (temp->type == WORD || temp->type == VAR)
 	{
 		if (temp->join == true)
@@ -108,7 +108,7 @@ int	create_args_ecmd(t_token **list, t_commands *cmd)
 		i++;
 		temp = temp->next;
 	}
-	cmd->args[i] = "\0";
+	cmd->args[i] = NULL;
 	(*list) = temp;
 	return (0);
 }

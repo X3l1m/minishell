@@ -26,7 +26,7 @@ static void	check_commands_empty(t_data *data)
 {
 	t_commands	*cmd;
 
-	printf("checking commands\n");
+	// printf("checking commands\n");
 	if (!data || !data->cmd)
 	{
 		if (!data)
@@ -36,13 +36,13 @@ static void	check_commands_empty(t_data *data)
 		return ;
 	}
 	cmd = data->cmd;
-	while (cmd && cmd->cmd)
+	while (cmd && cmd->com)
 	{
 		if (!cmd->args)
 		{
 			cmd->args = malloc(sizeof * cmd->args * 2);
-			cmd->args[0] = ft_strdup(cmd->cmd);
-			cmd->args[1] = "\0";
+			cmd->args[0] = ft_strdup(cmd->com);
+			cmd->args[1] = NULL;
 		}
 		cmd = cmd->next;
 	}
@@ -52,7 +52,7 @@ void	parse_data(t_data *data, t_token *token)
 {
 	t_token	*temp;
 
-	printf("it's time to parse data\n");
+	// printf("it's time to parse data\n");
 	if (token->type == END)
 		return ;
 	temp = token;

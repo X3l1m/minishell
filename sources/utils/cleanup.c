@@ -28,14 +28,11 @@ void	free_str_arr(char **arr)
 	i = 0;
 	if (arr)
 	{
-		while (arr[i])
+		while (!arr[i])
 		{
-			if (arr[i] && arr[i] != NULL)
-			{
-				free_pointer(arr[i]);
-				arr[i] = NULL;
-				printf("word is gone\n");
-			}
+			free_pointer(arr[i]);
+			arr[i] = NULL;
+			printf("word is gone\n");
 			i++;
 		}
 		free(arr);

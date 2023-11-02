@@ -25,6 +25,7 @@ void	init_data_fd(t_commands *cmd)
 		cmd->fd_data->quotes_hd = false;
 		cmd->fd_data->fd_in = -1;
 		cmd->fd_data->fd_out = -1;
+		cmd->fd_check = 1;
 	}
 }
 
@@ -32,6 +33,7 @@ bool	init_data(t_data *data, char **env)
 {
 	data->token = NULL;
 	data->env = envcpy(env);
+	data->env->list = env;
 	if (!data->env)
 		return (NULL);
 	data->user_input = NULL;

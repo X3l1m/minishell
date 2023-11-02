@@ -22,7 +22,7 @@ static void	handle_append(t_data_fd *io, char *filename, char *o_filename)
 		cmd_err_msg(o_filename, NULL, ERR_AR, false);
 		return ;
 	}
-	io->fd_out = open(io->infile, O_WRONLY | O_CREAT | O_APPEND, 0664);
+	io->fd_out = open(io->outfile, O_WRONLY | O_CREAT | O_APPEND, 0664);
 	if (io->fd_out == -1)
 		cmd_err_msg(io->outfile, NULL, strerror(errno), false);
 }

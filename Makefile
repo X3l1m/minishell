@@ -23,6 +23,12 @@ MAIN_FILES = main.c
 MAIN_DIR = main/
 MAIN_DF = $(addprefix $(MAIN_DIR), $(MAIN_FILES))
 
+EXECUTOR_FILES =	executor.c\
+					find_path.c\
+					cd_com.c
+EXECUTOR_DIR = execution/
+EXECUTOR_DF = $(addprefix $(EXECUTOR_DIR), $(EXECUTOR_FILES))
+
 #utils files
 UTILS_FILES = 		cleanup.c\
 					error.c\
@@ -82,8 +88,7 @@ ENDING_DIR = ending/
 ENDING_DF =$(addprefix $(ENDING_DIR), $(ENDING_FILES))
 
 SOURCES_DIR = sources/
-FILES =	$(MAIN_DF) $(LEXER_DF) $(EXPANDER_DF) $(PARSING_DF) $(UTILS_DF) $(SIGNALS_DF) $(ENVP_DF) $(ENDING_DF)
-#FILES =	$(MAIN_DF) $(LEXER_DF) $(EXPANDER_DF) $(PARSING_DF) $(EXECUTOR_DF) $(UTILS_DF) $(SIGNALS_DF) $(ENVP_DF) $(ENDING_DF)
+FILES =	$(MAIN_DF) $(LEXER_DF) $(EXPANDER_DF) $(PARSING_DF) $(UTILS_DF) $(SIGNALS_DF) $(ENVP_DF) $(ENDING_DF) $(EXECUTOR_DF)
 SOURCES = $(addprefix $(SOURCES_DIR), $(FILES))
 
 #INCLUDES = includes -I/Users/rmaes/.brew/opt/readline/include
@@ -93,7 +98,7 @@ MAC_INCLUDES = includes -lreadline -lhistory
 OBJECTS_DIR = objects/
 OBJECTS = $(addprefix $(OBJECTS_DIR), $(FILES:.c=.o))
 
-CFLAGS = -Wall -Wextra -Werror
+CFLAGS =
 CC = gcc -g
 NAME = minishell
 
