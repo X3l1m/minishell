@@ -1,15 +1,3 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        ::::::::            */
-/*   expand_utils2.c                                    :+:    :+:            */
-/*                                                     +:+                    */
-/*   By: Owen <Owen@student.codam.nl>                 +#+                     */
-/*                                                   +#+                      */
-/*   Created: 2023/06/27 14:54:20 by Owen          #+#    #+#                 */
-/*   Updated: 2023/07/03 15:44:20 by rmaes         ########   odam.nl         */
-/*                                                                            */
-/* ************************************************************************** */
-
 #include <minishell.h>
 
 char	*id_variable(char *string)
@@ -37,11 +25,21 @@ char	*id_variable(char *string)
 	return (var);
 }
 
+char	*get_evn_char(t_dllist *env, char *var)
+{
+	t_dlnode	*tmp;
+
+	tmp = find_env(env, var);
+	if (!tmp)
+		return (NULL);
+	return (ft_strdup(tmp->value));
+}
+
 bool	valid_var(t_data *data, char *var)
 {
 	char	*temp;
 
-	temp = ft_getenv(data->env, var);
+	temp = get_evn_char(data->env, var);
 	if (temp == NULL)
 		return (false);
 	return (true);

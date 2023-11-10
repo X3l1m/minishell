@@ -15,6 +15,8 @@ char	*add_path(char *path, char *com, char c)
 	if (path[len - 1] != c)
 		add = 1;
 	new = malloc(len + len2 + add + 1);
+	if (!new)
+		error_mini("Malloc(find_path: 19)", -1);
 	if (add)
 		new[len] = c;
 	ft_memcpy(new, path, len);
@@ -23,14 +25,8 @@ char	*add_path(char *path, char *com, char c)
 	return (new);
 }
 
-char	*find_env(t_dlnode *env, char *name)
-{
-	while (ft_strcmp(env->name, name))
-		env = env->next;
-	return (env->value);
-}
 
-char	*pathf(char *com, t_dlnode *env)
+char	*pathf(char *com, t_dllist *env)
 {
 	int		i;
 	char	**path;
@@ -38,13 +34,18 @@ char	*pathf(char *com, t_dlnode *env)
 
 	i = 0;
 	cp = com;
-	path = ft_split(find_env(env, "PATH"), ':');
+	path = ft_split(find_env(env, "PATH")->value, ':');
+	if (!path)
+		error_mini("ft_split(find_path: 39)", -1);
 	while (cp)
 	{
 		cp = add_path(path[i++], com, '/');
+		if (!cp)
+			break ;
 		if (!access(cp, X_OK))
-			return (cp);
+			break ;
 		free(cp);
 	}
-	return (NULL);
+	free_dub(path);
+	return (cp);
 }

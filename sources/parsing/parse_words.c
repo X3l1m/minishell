@@ -1,15 +1,3 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        ::::::::            */
-/*   parse_words.c                                      :+:    :+:            */
-/*                                                     +:+                    */
-/*   By: Owen <Owen@student.codam.nl>                 +#+                     */
-/*                                                   +#+                      */
-/*   Created: 2023/06/28 18:20:48 by Owen          #+#    #+#                 */
-/*   Updated: 2023/07/03 15:50:42 by rmaes         ########   odam.nl         */
-/*                                                                            */
-/* ************************************************************************** */
-
 #include <minishell.h>
 
 bool	space_present(char *string)
@@ -34,7 +22,6 @@ void	cmd_split_var(t_commands *cmd, char *string)
 	int			i;
 
 	new = NULL;
-	printf("splitting vars apart\n");
 	words = ft_split(string, ' ');
 	if (!words)
 		return ;
@@ -61,7 +48,6 @@ void	parse_word(t_commands **cmd, t_token **list)
 	while (temp->type == WORD || temp->type == VAR)
 	{
 		last = lst_last_cmd(*cmd);
-		// printf("so far so good\n");
 		if (temp->prev == NULL || (temp->prev && temp->prev->type == PIPE)
 			|| last->com == NULL)
 		{

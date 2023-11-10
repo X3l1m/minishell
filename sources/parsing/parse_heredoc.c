@@ -1,15 +1,3 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        ::::::::            */
-/*   parse_heredoc.c                                    :+:    :+:            */
-/*                                                     +:+                    */
-/*   By: Owen <Owen@student.codam.nl>                 +#+                     */
-/*                                                   +#+                      */
-/*   Created: 2023/06/28 00:11:59 by Owen          #+#    #+#                 */
-/*   Updated: 2023/07/03 15:50:40 by rmaes         ########   odam.nl         */
-/*                                                                            */
-/* ************************************************************************** */
-
 #include <minishell.h>
 
 bool	fill_heredoc(t_data *data, t_data_fd *io, int fd)
@@ -68,4 +56,5 @@ void	parse_heredoc(t_data *data, t_commands **last_cmd, t_token **list)
 	else
 		temp = temp->next;
 	*list = temp;
+	unlink(io->infile);
 }

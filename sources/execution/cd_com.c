@@ -2,6 +2,11 @@
 
 int	cd_com(t_commands *cmd)
 {
+	if (!cmd->args[1])
+	{
+		cmd_err_msg("cd", NULL, "no given arguments", 1);
+		return (FAILURE);
+	}
 	if (cmd->args[2])
 	{
 		cmd_err_msg("cd", NULL, "too many arguments", 1);
@@ -9,6 +14,7 @@ int	cd_com(t_commands *cmd)
 	}
 	if (chdir(cmd->args[1]) == -1)
 	{
+		ft_putstr_fd("minishel: ", STDERR_FILENO);
 		perror("cd");
 		return (FAILURE);
 	}
@@ -18,14 +24,14 @@ int	cd_com(t_commands *cmd)
 int	pwd_com(void)
 {
 	char	*cwd;
-	
+
 	cwd = getcwd(NULL, 0);
 	if (!cwd)
 	{
 		perror("pwd");
-		return (FAILURE);
+		return (errno);
 	}
-	printf("%s\n", cwd);
+	ft_putendl_fd(cwd, STDOUT_FILENO);
 	free(cwd);
 	return (SUCCES);
 }
@@ -45,8 +51,12 @@ int	echo_com(t_commands *cmd)
 {
 	int		i;
 	bool	nl;
+
 	if (!cmd->args[1])
-		return (1);
+	{
+		write(1, "\n", 1);
+		return (SUCCES);
+	}
 	nl = false;
 	if (cmd->args[1][0] == '-')
 		nl = check_n(cmd->args[1]);
@@ -59,10 +69,5 @@ int	echo_com(t_commands *cmd)
 	}
 	if (!nl)
 		write(1, "\n", 1);
-	return (0);
-}
-
-int	export_com()
-{
-	return 0;
+	return (SUCCES);
 }

@@ -1,45 +1,4 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        ::::::::            */
-/*   parse_input_str.c                                  :+:    :+:            */
-/*                                                     +:+                    */
-/*   By: Owen <Owen@student.codam.nl>                 +#+                     */
-/*                                                   +#+                      */
-/*   Created: 2023/06/23 14:54:15 by Owen          #+#    #+#                 */
-/*   Updated: 2023/09/01 09:59:41 by Owen          ########   odam.nl         */
-/*                                                                            */
-/* ************************************************************************** */
-
 #include <minishell.h>
-
-void	testing_purposes(t_commands *cmd)
-{
-	t_commands	*test;
-	int			i;
-
-	test = cmd;
-	i = 0;
-	printf("testing the commands output\n");
-	while (test)
-	{
-		if (test->com)
-			printf("Command is %s\n", test->com);
-		if (test->args && test->pipe == false)
-		{
-			printf("Args are ");
-			while (test->args[i])
-			{
-				printf("%s ", test->args[i]);
-				i++;
-			}
-		}
-		if (test->next != NULL)
-			test = test->next;
-		else
-			break ;
-	}
-	printf("\nDone with test\n");
-}
 
 bool	is_space(char *str)
 {
@@ -57,23 +16,51 @@ bool	is_space(char *str)
 	return (true);
 }
 
-bool	parse_input_str(t_data *data)
+void	last_com(t_commands *cmd, t_dllist *env)
 {
-	t_token	*temp;
+	int			i;
+	char		*last;
+	t_dlnode	*tmp;
+
+	i = -1;
+	tmp = find_env(env, "_");
+	if (!tmp)
+		return ;
+	if (cmd->pipe)
+		return ;
+	while (cmd->args[++i])
+	{
+		if (!cmd->args[i + 1])
+		{
+			last = ft_strdup(cmd->args[i]);
+			if (!last)
+				return (ft_putstr_fd("malloc fail: last_com", STDERR_FILENO));
+			break ;
+		}
+	}
+	free(tmp->value);
+	tmp->value = last;
+	update_evn(env);
+}
+
+int	parse_input_str(t_data *data)
+{
 	if (data->user_input == NULL)
-		exit(42);
-	else if (ft_strcmp(data->user_input, "\0") == 0)
-		return (false);
+		free_data(data, true);
+	else if (!data->user_input[0])
+		return (SUCCES);
 	else if (is_space(data->user_input) == true)
-		return (true);
+		return (SUCCES);
 	add_history(data->user_input);
-	if (tokenizer(data, data->user_input) == FAILURE)
-		return (false);
+	if (tokenizer(data, data->user_input))
+		return (FAILURE);
 	if (data->token->type == END)
-		return (false);
+		return (FAILURE);
 	if (check_for_var(&data->token) == false)
-		return (false);
-	expand_var(data, &data->token);
+		return (FAILURE);
+	if (expand_var(data, &data->token))
+		return (FAILURE);
 	parse_data(data, data->token);
-	return (true);
+	last_com(data->cmd, data->env);
+	return (SUCCES);
 }

@@ -1,15 +1,3 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        ::::::::            */
-/*   expand_var.c                                       :+:    :+:            */
-/*                                                     +:+                    */
-/*   By: Owen <Owen@student.codam.nl>                 +#+                     */
-/*                                                   +#+                      */
-/*   Created: 2023/06/24 21:00:58 by Owen          #+#    #+#                 */
-/*   Updated: 2023/07/03 16:18:00 by rmaes         ########   odam.nl         */
-/*                                                                            */
-/* ************************************************************************** */
-
 #include <minishell.h>
 
 void	update_status(t_token **node, char c)
@@ -27,7 +15,7 @@ void	update_status(t_token **node, char c)
 /*sleepcoded, check later*/
 bool	next_char_sep(char c)
 {
-	if (c == '$' || c == ' ' || c == '=' || c == '\0')
+	if (c == '$' || c == ' ' || c == '=' || c == '\0' || c == '\'' || c == '\"')
 		return (true);
 	return (false);
 }
@@ -54,7 +42,7 @@ char	*get_val(t_data *data, t_token *temp, char *string)
 	{
 		if (temp)
 			temp->valid_var = true;
-		value = ft_getenv(data->env, var);
+		value = get_evn_char(data->env, var);
 	}
 	else if (var && var[0] == '?')
 		value = ft_itoa(g_exit_code);
@@ -73,22 +61,22 @@ int	expand_var(t_data *data, t_token **list)
 	temp = *list;
 	while (temp)
 	{
-		if (temp->type == VAR)
+		i = 0;
+		while (temp->string[i] && temp->type == VAR)
 		{
-			i = 0;
-			while (temp->string[i])
+			update_status(&temp, temp->string[i]);
+			if (temp->string[i] == '$' && !next_char_sep(temp->string[i + 1])
+				&& !var_between_quotes(temp->string, i)
+				&& (temp->status == DEFAULT || temp->status == D_QUOTES))
 			{
-				update_status(&temp, temp->string[i]);
-				if (temp->string[i] == '$' && next_char_sep(temp->string[i + 1])
-					== false && var_between_quotes(temp->string, i) == false
-					&& (temp->status == DEFAULT || temp->status == D_QUOTES))
-					replace_var(&temp,
-						get_val(data, temp, temp->string + i), i);
-				else
-					i++;
+				if (replace_var(&temp,get_val(data, temp, temp->string + i), i))
+					return (FAILURE);
 			}
+			else
+				i++;
 		}
 		temp = temp->next;
 	}
-	return (handle_quotes(data) == false);
+	handle_quotes(data);
+	return (SUCCES);
 }

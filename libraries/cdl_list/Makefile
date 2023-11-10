@@ -1,16 +1,3 @@
-# **************************************************************************** #
-#                                                                              #
-#                                                         ::::::::             #
-#    Makefile                                           :+:    :+:             #
-#                                                      +:+                     #
-#    By: rmaes <rmaes@student.codam.nl>               +#+                      #
-#                                                    +#+                       #
-#    Created: 2022/06/13 17:19:52 by rmaes         #+#    #+#                  #
-#    Updated: 2022/12/15 21:19:42 by rmaes         ########   odam.nl          #
-#                                                                              #
-# **************************************************************************** #
-
-
 #Colors
 DEFAULT = \033[0;39m
 RED = \033[0;91m
@@ -26,13 +13,12 @@ FILES =		cdl_listaddback.c \
 			cdl_listgetnode.c \
 			cdl_listincr.c \
 			cdl_listinit.c \
-			cdl_listpopnode.c \
 			cdl_nodenew.c
 SOURCES = $(addprefix $(SOURCES_DIR), $(FILES))
 OBJECTS_DIR = objects/
 OBJECTS = $(addprefix $(OBJECTS_DIR), $(FILES:.c=.o))
 
-CFLAGS = -Wall -Wextra -Werror
+CFLAGS = -g -Wall -Wextra -Werror
 CC = gcc
 NAME = cdl_list.a
 

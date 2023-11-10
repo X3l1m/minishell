@@ -1,15 +1,3 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        ::::::::            */
-/*   quotes.c                                           :+:    :+:            */
-/*                                                     +:+                    */
-/*   By: Owen <Owen@student.codam.nl>                 +#+                     */
-/*                                                   +#+                      */
-/*   Created: 2023/06/26 16:11:45 by Owen          #+#    #+#                 */
-/*   Updated: 2023/07/03 15:44:12 by rmaes         ########   odam.nl         */
-/*                                                                            */
-/* ************************************************************************** */
-
 #include <minishell.h>
 
 /*figure this out, something aint right*/
@@ -85,7 +73,7 @@ bool	quotes_found(char *string)
 	return (false);
 }
 
-bool	handle_quotes(t_data *data)
+void	handle_quotes(t_data *data)
 {
 	t_token	*temp;
 
@@ -96,5 +84,4 @@ bool	handle_quotes(t_data *data)
 			remove_quotes(&temp);
 		temp = temp->next;
 	}
-	return (true);
 }

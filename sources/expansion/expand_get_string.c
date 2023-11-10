@@ -1,15 +1,3 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        ::::::::            */
-/*   expand_get_string.c                                :+:    :+:            */
-/*                                                     +:+                    */
-/*   By: Owen <Owen@student.codam.nl>                 +#+                     */
-/*                                                   +#+                      */
-/*   Created: 2023/06/25 17:12:04 by Owen          #+#    #+#                 */
-/*   Updated: 2023/07/03 15:44:25 by rmaes         ########   odam.nl         */
-/*                                                                            */
-/* ************************************************************************** */
-
 #include <minishell.h>
 
 void	copy_new_var(char *new, char *var, int *j)
@@ -17,7 +5,6 @@ void	copy_new_var(char *new, char *var, int *j)
 	int	copy;
 
 	copy = 0;
-	printf("var is %s\n", var);
 	while (var[copy])
 	{
 		new[*j] = var[copy];

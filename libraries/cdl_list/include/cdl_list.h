@@ -1,15 +1,3 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        ::::::::            */
-/*   cdl_list.h                                         :+:    :+:            */
-/*                                                     +:+                    */
-/*   By: athena <athena@student.codam.nl>             +#+                     */
-/*                                                   +#+                      */
-/*   Created: 2022/12/13 13:05:43 by athena        #+#    #+#                 */
-/*   Updated: 2023/06/19 15:13:26 by rmaes         ########   odam.nl         */
-/*                                                                            */
-/* ************************************************************************** */
-
 #ifndef CDL_LIST_H
 # define CDL_LIST_H
 
@@ -33,10 +21,10 @@ typedef struct s_dlnode
 // head points to the first entry of the list
 typedef struct s_dllist
 {
-	size_t		listlen;
+	int			listlen;
+	char		**list;
 	t_dlnode	*head;
 	t_dlnode	*current;
-	char		**list;
 }				t_dllist;
 
 // add new node NODE to the back of LIST. If LIST is empty, it sets NODE as head
@@ -52,9 +40,6 @@ void		cdl_listclear(t_dllist *list);
 // The last element becomes the first one.
 void		cdl_listdecr(t_dllist *list);
 
-// deletes and frees the N'th node of LIST and its content
-void		cdl_listdelnode(t_dllist *list, int n);
-
 // retuns a pointer to the N'th node of LIST (head is node 0).
 // Because it is a circular list, it will loop around would N
 // be greater than listlen. returns NULL if there are no nodes in the list
@@ -67,9 +52,8 @@ void		cdl_listincr(t_dllist *list);
 // creates and allocates a new list. Returns NULL if allocation fails
 t_dllist	*cdl_listinit(void);
 
-// takes the N'th node from LIST, (head is node 0) and removes it from the list.
-// returns a pointer to the removed node
-t_dlnode	*cdl_listpopnode(t_dllist *list, int n);
+// remove given node from the list
+void		cdl_listdelnode(t_dllist *list, t_dlnode *node);
 
 // creates and allocates a new t_dlnode, using the given content
 // the prev and next pointers are set to NULL

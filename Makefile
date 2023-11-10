@@ -1,16 +1,3 @@
-# **************************************************************************** #
-#                                                                              #
-#                                                         ::::::::             #
-#    Makefile                                           :+:    :+:             #
-#                                                      +:+                     #
-#    By: rmaes <rmaes@student.codam.nl>               +#+                      #
-#                                                    +#+                       #
-#    Created: 2022/06/13 17:19:52 by rmaes         #+#    #+#                  #
-#    Updated: 2023/09/01 10:02:16 by Owen          ########   odam.nl          #
-#                                                                              #
-# **************************************************************************** #
-
-
 #Colors
 
 DEFAULT = \033[0;39m
@@ -25,7 +12,9 @@ MAIN_DF = $(addprefix $(MAIN_DIR), $(MAIN_FILES))
 
 EXECUTOR_FILES =	executor.c\
 					find_path.c\
-					cd_com.c
+					cd_com.c\
+					export.c\
+					unset_com.c
 EXECUTOR_DIR = execution/
 EXECUTOR_DF = $(addprefix $(EXECUTOR_DIR), $(EXECUTOR_FILES))
 
@@ -79,7 +68,7 @@ SIGNAL_DIR = signals/
 SIGNALS_DF = $(addprefix $(SIGNAL_DIR), $(SIGNAL_FILES))
 
 #environment variables files
-ENVP_FILES = envp.c ft_getenv.c
+ENVP_FILES = envp.c
 ENVP_DIR = envp/
 ENVP_DF = $(addprefix $(ENVP_DIR), $(ENVP_FILES))
 
@@ -98,7 +87,7 @@ MAC_INCLUDES = includes -lreadline -lhistory
 OBJECTS_DIR = objects/
 OBJECTS = $(addprefix $(OBJECTS_DIR), $(FILES:.c=.o))
 
-CFLAGS =
+CFLAGS = -Wall -Werror -Wextra
 CC = gcc -g
 NAME = minishell
 
@@ -142,7 +131,7 @@ clean:
 fclean: clean
 	@echo "cleaning:  $(RED)removing $(NAME)$(DEFAULT)"
 	@rm -f $(NAME)
-	@make -C $(LIBFT_FOLDER) rmlib
+	@make -C $(LIBFT_FOLDER) fclean
 	@make -C $(LIST_FOLDER) rmlib
 
 re: fclean all

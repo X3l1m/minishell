@@ -29,11 +29,29 @@ void	init_data_fd(t_commands *cmd)
 	}
 }
 
+void	add_shlvl(t_dllist *env)
+{
+	t_dlnode	*tmp;
+	char		*ito;
+
+	tmp = find_env(env, "SHLVL");
+	if (!tmp)
+	{
+		tmp = cdl_nodenew(ft_strdup("SHLVL"), ft_strdup("1"));
+		cdl_listaddback(env, tmp);
+	}
+	ito = ft_itoa(ft_atoi(tmp->value) + 1);
+	free_pointer(tmp->value);
+	tmp->value = ito;
+}
+
 bool	init_data(t_data *data, char **env)
 {
 	data->token = NULL;
 	data->env = envcpy(env);
-	data->env->list = env;
+	add_shlvl(data->env);
+	update_evn(data->env);
+	// data->env->list = env;
 	if (!data->env)
 		return (NULL);
 	data->user_input = NULL;

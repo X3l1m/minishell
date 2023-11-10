@@ -1,15 +1,3 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        ::::::::            */
-/*   tokenizer.c                                        :+:    :+:            */
-/*                                                     +:+                    */
-/*   By: Owen <Owen@student.codam.nl>                 +#+                     */
-/*                                                   +#+                      */
-/*   Created: 2023/06/23 15:17:22 by Owen          #+#    #+#                 */
-/*   Updated: 2023/06/28 20:04:19 by Owen          ########   odam.nl         */
-/*                                                                            */
-/* ************************************************************************** */
-
 #include <minishell.h>
 
 int	set_status(int status, char *str, int i)
@@ -45,9 +33,10 @@ int	tokenizer(t_data *data, char *str)
 	if (status != DEFAULT)
 	{
 		if (status == D_QUOTES)
-			printf("error, unexpected EOF while looking for matching \"\n");
+			ft_putendl_fd("error, unexpected EOF while looking for matching \"", STDERR_FILENO);
 		if (status == S_QUOTES)
-			printf("error, unexpected EOF while looking for matching \'\n");
+			ft_putendl_fd("error, unexpected EOF while looking for matching \'", STDERR_FILENO);
+		return (FAILURE);
 	}
-	return (0);
+	return (SUCCES);
 }

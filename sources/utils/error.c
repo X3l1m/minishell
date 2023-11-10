@@ -12,14 +12,19 @@
 
 #include <minishell.h>
 
-void	error_mini(char *errmsg)
+//if num is -1 program will exit with exit code 1
+//if num exist return num after error message
+int	error_mini(char *errmsg, int num)
 {
-	ft_putstr_fd("Error\n", 2);
+	ft_putstr_fd("Error\n", STDERR_FILENO);
 	if (errno == 0)
-		ft_putendl_fd(errmsg, 2);
+		ft_putendl_fd(errmsg, STDERR_FILENO);
 	else
 		perror(errmsg);
-	exit(EXIT_FAILURE);
+	if (num < 0)
+		exit(EXIT_FAILURE);
+	else
+		return(num);
 }
 
 static bool	need_quotes(char *cmd)
@@ -33,9 +38,7 @@ void	err_msg(char *com, char *msg)
 {
 	ft_putstr_fd(com, STDERR_FILENO);
 	write(STDERR_FILENO, ": ", 2);
-	ft_putstr_fd(msg, STDERR_FILENO);
-	write(STDERR_FILENO, "\n", 1);
-}
+	ft_putendl_fd(msg, STDERR_FILENO);}
 
 int	cmd_err_msg(char *command, char *info, char *msg, int err)
 {
@@ -52,7 +55,7 @@ int	cmd_err_msg(char *command, char *info, char *msg, int err)
 	if (info != NULL)
 	{
 		if (quotes == true)
-			err_msg = join_str(err_msg, "'");
+			err_msg = join_str(err_msg, "`");
 		err_msg = join_str(err_msg, info);
 		if (quotes == true)
 			err_msg = join_str(err_msg, "'");

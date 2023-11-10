@@ -1,15 +1,3 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        ::::::::            */
-/*   expand_utils.c                                     :+:    :+:            */
-/*                                                     +:+                    */
-/*   By: Owen <Owen@student.codam.nl>                 +#+                     */
-/*                                                   +#+                      */
-/*   Created: 2023/06/25 01:49:40 by Owen          #+#    #+#                 */
-/*   Updated: 2023/07/03 15:44:22 by rmaes         ########   odam.nl         */
-/*                                                                            */
-/* ************************************************************************** */
-
 #include <minishell.h>
 
 int	var_length(char *string)
@@ -26,43 +14,39 @@ int	var_length(char *string)
 		return (count + 1);
 	while (string[i])
 	{
-		if (ft_isalnum(string[i]) == 1 && string[i] != '_')
-		{
-			i++;
-			count++;
-		}
-		else
+		if (!ft_isalnum(string[i]) && string[i] != '_')
 			break ;
+		i++;
+		count++;
 	}
 	return (count);
 }
 
-static bool	erase_variable(t_token **list, char *string, int index)
+static bool	erase_var(t_token *list, char *string, int index)
 {
 	int		i;
-	int		j;
+	int		s;
 	int		len;
 	char	*new;
 
-	i = 0;
-	j = 0;
-	len = ft_strlen(string) - var_length(string + index);
-	new = (char *)malloc(sizeof(char) * len + 1);
+	i = var_length(string + index) + 1;
+	len = ft_strlen(string) - i;
+	new = malloc(len);
 	if (!new)
 		return (false);
-	while (string[i])
+	new[len] = 0;
+	s = 0;
+	len = 0;
+	while (string[s])
 	{
-		if (string[i] == '$' && i == index)
-		{
-			i = i + var_length(string + index);
-			if (string[i] == '\0')
-				break ;
-		}
-		new[j++] = string[i++];
+		if (s == index)
+			s += i;
+		new[len] = string[s];
+		s++;
+		len++;
 	}
-	new[j] = '\0';
-	free_pointer((*list)->string);
-	(*list)->string = new;
+	free(list->string);
+	list->string = new;
 	return (true);
 }
 
@@ -84,19 +68,22 @@ static bool	erase_replace_var(t_token **list, char *string,
 	return (true);
 }
 
-void	replace_var(t_token **list, char *var, int index)
+int	replace_var(t_token **list, char *var, int index)
 {
-	if (var == NULL)
+	if ((*list)->string[0] != '\'')
 	{
-		(*list)->string[0] = 0;
-	}
-	else
-	{
-		if (erase_replace_var(list, (*list)->string, var, index) == false)
+		if (var == NULL)
 		{
-			free_pointer(var);
-			return ;
+			if(!erase_var(*list, (*list)->string, index))
+				return (error_mini("Malloc(export: 78)", 1));
+		}
+		else
+		{
+			if(!erase_replace_var(list, (*list)->string, var, index))
+				return (error_mini("Malloc(export: 83)", 1));
 		}
 	}
 	free_pointer(var);
+	*list = (*list)->next;
+	return (SUCCES);
 }

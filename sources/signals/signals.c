@@ -17,45 +17,37 @@ void	reset(int	temp)
 {
 	(void)temp;
 	write (1, "\n", 1);
-	g_exit_code = 1;
+	g_exit_code = 130;
 	rl_on_new_line();
 	rl_replace_line("", 0);
 	rl_redisplay();
 }
 
 /*Prints a newline when a signal is caught*/
-void	signal_newline(int signal)
+void	s_newline(int signal)
 {
 	(void)signal;
 	rl_on_new_line();
 }
 
-void	ignore_sigquit(void)
-{
-	struct sigaction	ms;
-
-	ft_memset(&ms, 0, sizeof(ms));
-	ms.sa_handler = SIG_IGN;
-	sigaction(SIGQUIT, &ms, NULL);
-}
-
 void	set_signals_interactive(void)
 {
-	struct sigaction	ms;
-
-	ignore_sigquit();
-	ft_memset(&ms, 0, sizeof(ms));
-	ms.sa_handler = &reset;
-	sigaction(SIGINT, &ms, NULL);
+	if (signal(SIGQUIT, SIG_IGN) == SIG_ERR)
+		perror("signal36");
+	if (signal(SIGINT, reset) == SIG_ERR)
+		perror("signal38");
 }
-
 
 void	set_signals_noninteractive(void)
 {
-	struct sigaction	ms;
-
-	ft_memset(&ms, 0, sizeof(ms));
-	ms.sa_handler = &signal_newline;
-	sigaction(SIGINT, &ms, NULL);
-	sigaction(SIGQUIT, &ms, NULL);
+	if (signal(SIGINT, s_newline) == SIG_ERR)
+	{
+		perror("signal45");
+		exit(FAILURE);
+	}
+	if (signal(SIGQUIT, s_newline) == SIG_ERR)
+	{
+		perror("signal50");
+		exit(FAILURE);
+	}
 }

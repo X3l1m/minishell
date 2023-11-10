@@ -1,15 +1,3 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        ::::::::            */
-/*   parse_input.c                                      :+:    :+:            */
-/*                                                     +:+                    */
-/*   By: Owen <Owen@student.codam.nl>                 +#+                     */
-/*                                                   +#+                      */
-/*   Created: 2023/06/29 20:18:43 by Owen          #+#    #+#                 */
-/*   Updated: 2023/06/30 00:56:42 by Owen          ########   odam.nl         */
-/*                                                                            */
-/* ************************************************************************** */
-
 #include <minishell.h>
 
 bool	remove_old_ref(t_data_fd *io, bool infile)
@@ -22,7 +10,6 @@ bool	remove_old_ref(t_data_fd *io, bool infile)
 		{
 			free_pointer(io->delim_hd);
 			io->delim_hd = NULL;
-			unlink(io->infile);
 		}
 		free_pointer(io->infile);
 		close(io->fd_in);

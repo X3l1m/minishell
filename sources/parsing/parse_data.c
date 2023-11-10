@@ -1,15 +1,3 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        ::::::::            */
-/*   parse_data.c                                       :+:    :+:            */
-/*                                                     +:+                    */
-/*   By: Owen <Owen@student.codam.nl>                 +#+                     */
-/*                                                   +#+                      */
-/*   Created: 2023/06/27 17:54:01 by Owen          #+#    #+#                 */
-/*   Updated: 2023/07/03 16:43:36 by rmaes         ########   odam.nl         */
-/*                                                                            */
-/* ************************************************************************** */
-
 #include <minishell.h>
 
 void	handle_pipe(t_commands **cmds, t_token **list)
@@ -22,18 +10,17 @@ void	handle_pipe(t_commands **cmds, t_token **list)
 	*list = (*list)->next;
 }
 
-static void	check_commands_empty(t_data *data)
+static int	check_commands_empty(t_data *data)
 {
 	t_commands	*cmd;
 
-	// printf("checking commands\n");
 	if (!data || !data->cmd)
 	{
 		if (!data)
 			printf("no data\n");
 		else if (!data->cmd)
 			printf("no cmd\n");
-		return ;
+		return (SUCCES);
 	}
 	cmd = data->cmd;
 	while (cmd && cmd->com)
@@ -42,26 +29,26 @@ static void	check_commands_empty(t_data *data)
 		{
 			cmd->args = malloc(sizeof * cmd->args * 2);
 			cmd->args[0] = ft_strdup(cmd->com);
+			if (!cmd->args[0])
+				return (error_mini("ft_split(parse_data: 46)", 1));
 			cmd->args[1] = NULL;
 		}
 		cmd = cmd->next;
 	}
+	return (SUCCES);
 }
 
 void	parse_data(t_data *data, t_token *token)
 {
 	t_token	*temp;
 
-	// printf("it's time to parse data\n");
 	if (token->type == END)
 		return ;
 	temp = token;
 	while (temp->next != NULL)
 	{
-		//printf("new node\n");
 		if (temp == token)
 			lst_add_back_cmd(&data->cmd, lst_new_command(false));
-		//printf("empty node made, ready to be filled. It does exist though!\n");
 		if (temp->type == HEREDOC)
 			parse_heredoc(data, &data->cmd, &temp);
 		else if (temp->type == WORD || temp->type == VAR)
@@ -75,10 +62,7 @@ void	parse_data(t_data *data, t_token *token)
 		else if (temp->type == PIPE)
 			handle_pipe(&data->cmd, &temp);
 		else if (temp->type == END)
-		{
-			printf("it's done\n");
 			break ;
-		}
 	}
 	check_commands_empty(data);
 	return ;

@@ -1,15 +1,3 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        ::::::::            */
-/*   parse_append.c                                     :+:    :+:            */
-/*                                                     +:+                    */
-/*   By: Owen <Owen@student.codam.nl>                 +#+                     */
-/*                                                   +#+                      */
-/*   Created: 2023/06/29 21:37:29 by Owen          #+#    #+#                 */
-/*   Updated: 2023/06/30 00:57:21 by Owen          ########   odam.nl         */
-/*                                                                            */
-/* ************************************************************************** */
-
 #include <minishell.h>
 
 static void	handle_append(t_data_fd *io, char *filename, char *o_filename)

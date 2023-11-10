@@ -76,7 +76,7 @@ char	*merge_vars(t_token **list)
 	temp = *list;
 	string = ft_strdup(temp->string);
 	while ((temp->type == VAR && temp->next->type == VAR)
-			|| temp->join == true)
+			|| (temp->join && temp->next->join))
 	{
 		string = join_str(string, temp->next->string);
 		temp = temp->next;
@@ -95,7 +95,7 @@ int	create_args_ecmd(t_token **list, t_commands *cmd)
 	remove_empty_vars(list);
 	temp = *list;
 	count = count_e_args(temp);
-	cmd->args = malloc(sizeof(char *) * (count + 2));
+	cmd->args = ft_calloc(sizeof(char *), count + 2);
 	if (!cmd->args)
 		return (1);
 	cmd->args[0] = ft_strdup(cmd->com);

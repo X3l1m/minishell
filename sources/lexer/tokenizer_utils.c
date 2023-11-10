@@ -1,26 +1,15 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        ::::::::            */
-/*   tokenizer_utils.c                                  :+:    :+:            */
-/*                                                     +:+                    */
-/*   By: Owen <Owen@student.codam.nl>                 +#+                     */
-/*                                                   +#+                      */
-/*   Created: 2023/06/23 15:32:31 by Owen          #+#    #+#                 */
-/*   Updated: 2023/07/03 15:44:03 by rmaes         ########   odam.nl         */
-/*                                                                            */
-/* ************************************************************************** */
-
 #include <minishell.h>
 
 int	save_word(t_token **lst, char *str, int index, int start)
 {
 	int		i;
 	char	*word;
+	t_token	*new;
 
 	i = 0;
 	word = (char *)malloc(sizeof(char) * (index - start + 1));
 	if (!word)
-		return (FAILURE);
+		return (error_mini("Malloc(tokenizer_utils: 24)", 1));
 	while (start < index)
 	{
 		word[i] = str[start];
@@ -28,7 +17,10 @@ int	save_word(t_token **lst, char *str, int index, int start)
 		i++;
 	}
 	word[i] = '\0';
-	lst_add_back_tkn(lst, new_token(word, ft_strdup(word), WORD, DEFAULT));
+	new = new_token(word, ft_strdup(word), WORD, DEFAULT);
+	if (!new)
+		return (error_mini("Malloc(tokenizer_utils: 34)", 1));
+	lst_add_back_tkn(lst, new);
 	return (SUCCES);
 }
 
@@ -36,13 +28,14 @@ int	save_seperator(t_token **lst, char *str, int index, int type)
 {
 	int		i;
 	char	*sep;
+	t_token	*new;
 
 	i = 0;
 	if (type == HEREDOC || type == APPEND)
 	{
 		sep = (char *)malloc(sizeof(char) * 3);
 		if (!sep)
-			return (FAILURE);
+			return (error_mini("Malloc(tokenizer_utils: 50)", 1));
 		while (i < 2)
 		{
 			sep[i] = str[index];
@@ -50,17 +43,19 @@ int	save_seperator(t_token **lst, char *str, int index, int type)
 			index++;
 		}
 		sep[i] = '\0';
-		lst_add_back_tkn(lst, new_token(sep, ft_strdup(sep), type, DEFAULT));
 	}
 	else
 	{
 		sep = (char *)malloc(sizeof(char) * 2);
 		if (!sep)
-			return (FAILURE);
+			return (error_mini("Malloc(tokenizer_utils: 63)", 1));
 		sep[0] = str[index];
 		sep[1] = '\0';
-		lst_add_back_tkn(lst, new_token(sep, ft_strdup(sep), type, DEFAULT));
 	}
+	new = new_token(sep, ft_strdup(sep), type, DEFAULT);
+	if (!new)
+		return (error_mini("Malloc(tokenizer_utils: 69)", 1));
+	lst_add_back_tkn(lst, new);
 	return (SUCCES);
 }
 

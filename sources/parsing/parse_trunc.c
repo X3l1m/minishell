@@ -1,15 +1,3 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        ::::::::            */
-/*   parse_trunc.c                                      :+:    :+:            */
-/*                                                     +:+                    */
-/*   By: Owen <Owen@student.codam.nl>                 +#+                     */
-/*                                                   +#+                      */
-/*   Created: 2023/06/29 20:56:46 by Owen          #+#    #+#                 */
-/*   Updated: 2023/06/30 00:57:03 by Owen          ########   odam.nl         */
-/*                                                                            */
-/* ************************************************************************** */
-
 #include <minishell.h>
 
 static void	handle_trunc(t_data_fd *io, char *filename, char *o_filename)

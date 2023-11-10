@@ -1,15 +1,3 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        ::::::::            */
-/*   cdl_listgetnode.c                                  :+:    :+:            */
-/*                                                     +:+                    */
-/*   By: rmaes <rmaes@student.codam.nl>               +#+                     */
-/*                                                   +#+                      */
-/*   Created: 2022/12/13 17:05:22 by rmaes         #+#    #+#                 */
-/*   Updated: 2023/04/19 15:41:41 by rmaes         ########   odam.nl         */
-/*                                                                            */
-/* ************************************************************************** */
-
 #include "../include/cdl_list.h"
 
 // retuns a pointer to the N'th node of LIST (head is node 0).

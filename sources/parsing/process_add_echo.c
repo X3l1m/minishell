@@ -1,15 +1,3 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        ::::::::            */
-/*   process_add_echo.c                                 :+:    :+:            */
-/*                                                     +:+                    */
-/*   By: Owen <Owen@student.codam.nl>                 +#+                     */
-/*                                                   +#+                      */
-/*   Created: 2023/06/30 14:10:45 by Owen          #+#    #+#                 */
-/*   Updated: 2023/06/30 14:32:15 by Owen          ########   odam.nl         */
-/*                                                                            */
-/* ************************************************************************** */
-
 #include <minishell.h>
 
 char	**merge_into_array(int i, char **words, t_commands *cmd, t_token *temp)
