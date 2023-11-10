@@ -31,7 +31,7 @@ static bool	erase_var(t_token *list, char *string, int index)
 
 	i = var_length(string + index) + 1;
 	len = ft_strlen(string) - i;
-	new = malloc(len);
+	new = malloc(len + 1);
 	if (!new)
 		return (false);
 	new[len] = 0;

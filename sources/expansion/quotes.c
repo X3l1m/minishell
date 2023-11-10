@@ -40,7 +40,7 @@ bool	remove_quotes(t_token **list)
 	i = 0;
 	j = 0;
 	len = count_length((*list)->string, 0, 0);
-	new = (char *)malloc(sizeof(char) * len);
+	new = (char *)malloc(sizeof(char) * len + 1);
 	if (!new)
 		return (false);
 	while ((*list)->string[i])

@@ -37,9 +37,9 @@ char	*get_evn_char(t_dllist *env, char *var)
 
 bool	valid_var(t_data *data, char *var)
 {
-	char	*temp;
+	t_dlnode	*temp;
 
-	temp = get_evn_char(data->env, var);
+	temp = find_env(data->env, var);
 	if (temp == NULL)
 		return (false);
 	return (true);

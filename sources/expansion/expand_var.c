@@ -62,14 +62,14 @@ int	expand_var(t_data *data, t_token **list)
 	while (temp)
 	{
 		i = 0;
-		while (temp->string[i] && temp->type == VAR)
+		while (temp->type == VAR)
 		{
 			update_status(&temp, temp->string[i]);
 			if (temp->string[i] == '$' && !next_char_sep(temp->string[i + 1])
 				&& !var_between_quotes(temp->string, i)
 				&& (temp->status == DEFAULT || temp->status == D_QUOTES))
 			{
-				if (replace_var(&temp,get_val(data, temp, temp->string + i), i))
+				if (replace_var(&temp, get_val(data, temp, temp->string + i), i))
 					return (FAILURE);
 			}
 			else
