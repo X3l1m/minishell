@@ -24,19 +24,31 @@ void	setio(t_commands *cmd)
 	}
 }
 
+void	exec_check(char *com, char *path)
+{
+	struct stat	info;
+
+	if (stat(path, &info) == -1)
+		exit(cmd_err_msg(com, NULL, "No such file or directory", 127));
+	else if (S_ISDIR(info.st_mode))
+		exit(cmd_err_msg(com, NULL, "is a directory", 126));
+	else if ((info.st_mode & S_IXUSR) == 0)
+		exit(cmd_err_msg(com, NULL, "Permission denied", 126));
+}
+
 int	run_com(t_commands *cmd, t_dllist *env)
 {
 	char	*path;
 
+	if (!cmd->com || !*cmd->com)
+		exit (0);
 	if (!find_char(cmd->com, '/'))
 		path = pathf(cmd->com, env);
 	else
 		path = cmd->com;
 	if (!path)
-	{
-		err_msg(cmd->com, "command not found");
-		exit(127);
-	}
+		exit (err_msg(cmd->com, "command not found", 127));
+	exec_check(cmd->com, path);
 	execve(path, cmd->args, env->list);
 	perror(cmd->com);
 	exit(errno);
@@ -83,19 +95,22 @@ void	child(t_commands *cmd, t_dllist *env, int old_in, pid_t *pip)
 	if (cmd->next)
 		dup2(pip[1], STDOUT_FILENO);
 	close(pip[1]);
-	if (cmd->fd_check)
+	if (cmd->fd_check == 1)
 		setio(cmd);
+	else if (cmd->fd_check == -1)
+		exit (1);
 	b = builtin_com(cmd, env);
 	if (b != -1)
 		exit(b);
 	run_com(cmd, env);
 }
 
-int	get_exit_status(void)
+int	get_exit_status(pid_t pid)
 {
 	int	status;
 
-	while (wait(&status) != -1)
+	waitpid(pid, &status, 0);
+	while (wait(NULL) != -1)
 		;
 	if (WIFEXITED(status))
 		return (WEXITSTATUS(status));
@@ -113,7 +128,7 @@ int	fork_run(t_commands *cmd, t_dllist *env)
 		return (FAILURE);
 	if (!pid)
 		run_com(cmd, env);
-	return (get_exit_status());
+	return (get_exit_status(pid));
 }
 
 int	single_exec(t_commands *cmd, t_dllist *env)
@@ -122,12 +137,14 @@ int	single_exec(t_commands *cmd, t_dllist *env)
 	int	o_stdin;
 	int	o_stdout;
 
-	if (cmd->fd_check)
+	if (cmd->fd_check == 1)
 	{
 		o_stdin = dup(STDIN_FILENO);
 		o_stdout = dup(STDOUT_FILENO);
 		setio(cmd);
 	}
+	else if (cmd->fd_check == -1)
+		return (1);
 	b = builtin_com(cmd, env);
 	if (b == -1)
 		b = fork_run(cmd, env);
@@ -159,11 +176,12 @@ int	executor(t_commands *cmd, t_dllist *env)
 			return (FAILURE);
 		if (!pid)
 			child(cmd, env, old_in, pip);
-		close(old_in);
+		if (old_in != -1)
+			close(old_in);
 		old_in = pip[0];
 		close(pip[1]);
 		cmd = cmd->next;
 	}
 	close(old_in);
-	return (get_exit_status());
+	return (get_exit_status(pid));
 }

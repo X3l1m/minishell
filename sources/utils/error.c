@@ -34,11 +34,13 @@ static bool	need_quotes(char *cmd)
 	return (false);
 }
 
-void	err_msg(char *com, char *msg)
+int	err_msg(char *com, char *msg, int err_nm)
 {
 	ft_putstr_fd(com, STDERR_FILENO);
 	write(STDERR_FILENO, ": ", 2);
-	ft_putendl_fd(msg, STDERR_FILENO);}
+	ft_putendl_fd(msg, STDERR_FILENO);
+	return (err_nm);
+}
 
 int	cmd_err_msg(char *command, char *info, char *msg, int err)
 {

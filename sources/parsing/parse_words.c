@@ -52,9 +52,13 @@ void	parse_word(t_commands **cmd, t_token **list)
 			|| last->com == NULL)
 		{
 			if (temp->type == VAR && space_present(temp->string))
+			{
 				cmd_split_var(last, temp->string);
-			else
+			}
+			else if ((temp->string && temp->string[0]) || (temp->next->type != WORD && temp->next->type != VAR))
+			{
 				last->com = ft_strdup(temp->string);
+			}
 			temp = temp->next;
 		}
 		else

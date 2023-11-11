@@ -7,7 +7,7 @@ char	**merge_into_array(int i, char **words, t_commands *cmd, t_token *temp)
 	j = 0;
 	while (j < i)
 	{
-		words[j] = cmd->args[i];
+		words[j] = ft_strdup(cmd->args[j]);
 		j++;
 	}
 	while (temp->type == WORD || temp->type == VAR)
@@ -40,11 +40,10 @@ int	add_args_ecmd(t_token **list, t_commands *cmd)
 	if (!words)
 		return (1);
 	words = merge_into_array(i, words, cmd, temp);
-	free(cmd->args);
+	free_str_arr(cmd->args);
 	cmd->args = words;
 	while (temp->type == WORD || temp->type == VAR)
 		temp = temp->next;
-	cmd->args[i] = NULL;
 	(*list) = temp;
 	return (0);
 }

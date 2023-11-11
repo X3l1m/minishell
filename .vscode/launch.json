@@ -9,7 +9,7 @@
       "stopAtEntry": false,
       "externalConsole": false,
       "cwd": "/mnt/c/Users/edibs/Desktop/minisel",
-      "program": "/mnt/c/Users/edibs/Desktop/minisel/minishell",
+      "program": "/mnt/c/Users/edibs/Desktop/minisel/build/Debug/outDebug",
       "MIMode": "gdb",
       "miDebuggerPath": "gdb",
       "setupCommands": [

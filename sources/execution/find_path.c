@@ -28,13 +28,17 @@ char	*add_path(char *path, char *com, char c)
 
 char	*pathf(char *com, t_dllist *env)
 {
-	int		i;
-	char	**path;
-	char	*cp;
+	int			i;
+	char		**path;
+	char		*cp;
+	t_dlnode	*tmp;
 
 	i = 0;
 	cp = com;
-	path = ft_split(find_env(env, "PATH")->value, ':');
+	tmp = find_env(env, "PATH");
+	if (!tmp)
+		return (com);
+	path = ft_split(tmp->value, ':');
 	if (!path)
 		error_mini("ft_split(find_path: 39)", -1);
 	while (cp)
@@ -46,6 +50,6 @@ char	*pathf(char *com, t_dllist *env)
 			break ;
 		free(cp);
 	}
-	free_dub(path);
+	free_str_arr(path);
 	return (cp);
 }

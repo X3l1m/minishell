@@ -24,19 +24,17 @@ bool	remove_old_ref(t_data_fd *io, bool infile)
 	return (true);
 }
 
-static void	handle_infile(t_data_fd *io, char *filename, char *o_filename)
+static int	handle_infile(t_data_fd *io, char *filename, char *o_filename)
 {
 	if (!remove_old_ref(io, true))
-		return ;
+		return (-1);
 	io->infile = ft_strdup(filename);
 	if (io->infile && io->infile[0] == '\0')
-	{
-		cmd_err_msg(o_filename, NULL, ERR_AR, false);
-		return ;
-	}
+		return (cmd_err_msg(o_filename, NULL, ERR_AR, -1));
 	io->fd_in = open(io->infile, O_RDONLY);
 	if (io->fd_in == -1)
-		cmd_err_msg(io->infile, NULL, strerror(errno), false);
+		return (cmd_err_msg(io->infile, NULL, strerror(errno), -1));
+	return (1);
 }
 
 void	parse_input(t_commands **cmd, t_token **list)
@@ -47,7 +45,7 @@ void	parse_input(t_commands **cmd, t_token **list)
 	last = lst_last_cmd(*cmd);
 	temp = *list;
 	init_data_fd(last);
-	handle_infile(last->fd_data, temp->next->string, temp->next->string_cpy);
+	last->fd_check = handle_infile(last->fd_data, temp->next->string, temp->next->string_cpy);
 	if (temp->next->next)
 		temp = temp->next->next;
 	else

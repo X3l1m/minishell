@@ -4,7 +4,7 @@ void	change_status_quote(t_token **list, int *i)
 {
 	if ((*list)->string[*i] == '\'')
 		(*list)->status = S_QUOTES;
-	if ((*list)->string[*i] == '\"')
+	else if ((*list)->string[*i] == '\"')
 		(*list)->status = D_QUOTES;
 	(*i)++;
 }
@@ -34,5 +34,5 @@ void	sort_strings(t_token **list, char *new)
 {
 	free_pointer((*list)->string);
 	(*list)->string = new;
-	(*list)->join = true;
+	//(*list)->join = true;
 }

@@ -13,6 +13,7 @@
 # include <limits.h>
 # include <signal.h>
 # include <sys/wait.h>
+# include <sys/stat.h>
 # include <fcntl.h>
 # include <readline/readline.h>
 # include <readline/history.h>
@@ -94,7 +95,7 @@ int			cd_com(t_commands *cmd);
 int			echo_com(t_commands *cmd);
 int			pwd_com(void);
 int			builtin_com(t_commands *cmd, t_dllist *env);
-void		err_msg(char *com, char *msg);
+int			err_msg(char *com, char *msg, int err_nm);
 int			update_evn(t_dllist *env);
 void		cpy_last(char *s1, char *s2, int start);
 int			export_com(t_commands *cmd, t_dllist *env);
@@ -102,7 +103,7 @@ char		**split_one(char *str, char c);
 int			unset_com(t_commands *cmd, t_dllist *env);
 char		*get_evn_char(t_dllist *env, char *var);
 int			error_mini(char *errmsg, int num);
-int			replace_var(t_token **list, char *var, int index);
+int			replace_var(t_token *list, char *var, int index);
 void		free_dub(char **str);
 
 

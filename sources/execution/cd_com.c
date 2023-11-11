@@ -36,30 +36,34 @@ int	pwd_com(void)
 	return (SUCCES);
 }
 
-bool	check_n(char *str)
+int	check_n(char **str)
 {
 	int	i;
+	int	nl;
 
-	i = 1;
-	while (str[i])
-		if (str[i++] != 'n')
-			return (false);
-	return (true);
+	nl = 1;
+	while (str[nl][0] == '-')
+	{
+		i = 1;
+		while (str[nl][i])
+			if (str[nl][i++] != 'n')
+				return (nl - 1);
+		nl++;
+	}
+	return (nl - 1);
 }
 
 int	echo_com(t_commands *cmd)
 {
 	int		i;
-	bool	nl;
+	int		nl;
 
 	if (!cmd->args[1])
 	{
 		write(1, "\n", 1);
 		return (SUCCES);
 	}
-	nl = false;
-	if (cmd->args[1][0] == '-')
-		nl = check_n(cmd->args[1]);
+	nl = check_n(cmd->args);
 	i = nl;
 	while (cmd->args[++i])
 	{
