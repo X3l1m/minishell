@@ -24,25 +24,35 @@ int	save_word(t_token **lst, char *str, int index, int start)
 	return (SUCCES);
 }
 
-int	save_seperator(t_token **lst, char *str, int index, int type)
+char	*add_seperator(char *str, int index)
 {
 	int		i;
 	char	*sep;
+
+	sep = (char *)malloc(sizeof(char) * 3);
+	if (!sep)
+		return (NULL);
+	i = 0;
+	while (i < 2)
+	{
+		sep[i] = str[index];
+		i++;
+		index++;
+	}
+	sep[i] = '\0';
+	return (sep);
+}
+
+int	save_seperator(t_token **lst, char *str, int index, int type)
+{
+	char	*sep;
 	t_token	*new;
 
-	i = 0;
 	if (type == HEREDOC || type == APPEND)
 	{
-		sep = (char *)malloc(sizeof(char) * 3);
+		sep = add_seperator(str, index);
 		if (!sep)
 			return (error_mini("Malloc(tokenizer_utils: 50)", 1));
-		while (i < 2)
-		{
-			sep[i] = str[index];
-			i++;
-			index++;
-		}
-		sep[i] = '\0';
 	}
 	else
 	{

@@ -60,7 +60,8 @@ int	parse_input_str(t_data *data)
 		return (FAILURE);
 	if (expand_var(data, &data->token))
 		return (FAILURE);
-	parse_data(data, data->token);
+	if (data->token->type != END)
+		parse_data(data, data->token);
 	last_com(data->cmd, data->env);
 	return (SUCCES);
 }

@@ -42,8 +42,6 @@ void	parse_data(t_data *data, t_token *token)
 {
 	t_token	*temp;
 
-	if (token->type == END)
-		return ;
 	temp = token;
 	while (temp->next != NULL)
 	{

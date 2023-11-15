@@ -7,13 +7,20 @@ char *ilk(void)
 	return(dene);
 }
 
-void son(char *ilk)
+void son(char **str)
 {
-	free(ilk);
+	*str = malloc(5);
+	for (int i = 0; i < 4; i++)
+	{
+		*str[i] = 'a';
+	}
+	*str[4] = 0;
 }
 
 
 int	main()
 {
-	son(ilk());
+	char *str;
+	son(&str);
+	printf("%s\n", str);
 }

@@ -8,8 +8,8 @@
       "args": [],
       "stopAtEntry": false,
       "externalConsole": false,
-      "cwd": "/mnt/c/Users/edibs/Desktop/minisel",
-      "program": "/mnt/c/Users/edibs/Desktop/minisel/build/Debug/outDebug",
+      "cwd": "/home/linux/minisel",
+      "program": "/home/linux/minisel/build/Debug/outDebug",
       "MIMode": "gdb",
       "miDebuggerPath": "gdb",
       "setupCommands": [
