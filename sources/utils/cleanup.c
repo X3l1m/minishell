@@ -6,7 +6,7 @@
 /*   By: Owen <Owen@student.codam.nl>                 +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/06/24 01:20:27 by Owen          #+#    #+#                 */
-/*   Updated: 2023/09/01 10:08:34 by Owen          ########   odam.nl         */
+/*   Updated: 2023/12/11 05:03:25 by linux         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,11 +59,11 @@ void	free_data(t_data *data, bool clear_all)
 		lst_clear_tkn(&data->token, &free_pointer);
 	if (data && data->cmd)
 		lst_clear_cmd(&data->cmd, &free_pointer);
-	if (clear_all == true)
+	if (clear_all)
 	{
 		free_dub(data->env->list);
 		cdl_listclear(data->env);
 		rl_clear_history();
-		exit(0);
+		exit(g_exit);
 	}
 }

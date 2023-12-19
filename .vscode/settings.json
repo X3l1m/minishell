@@ -60,6 +60,9 @@
     "minishell.h": "c",
     "errno.h": "c",
     "error.h": "c",
-    "string.h": "c"
+    "string.h": "c",
+    "random": "c",
+    "limits": "c",
+    "algorithm": "c"
   }
 }

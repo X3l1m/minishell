@@ -64,25 +64,26 @@ int	env_com(char **env)
 	return (SUCCES);
 }
 
-int	builtin_com(t_commands *cmd, t_dllist *env)
+int	builtin_com(t_data *data)
 {
-	if (!ft_strcmp(cmd->com, "echo"))
-		return (echo_com(cmd));
-	if (!ft_strcmp(cmd->com, "cd"))
-		return (cd_com(cmd));
-	if (!ft_strcmp(cmd->com, "pwd"))
+	if (!ft_strcmp(data->cmd->com, "echo"))
+		return (echo_com(data->cmd));
+	if (!ft_strcmp(data->cmd->com, "cd"))
+		return (cd_com(data->cmd));
+	if (!ft_strcmp(data->cmd->com, "pwd"))
 		return (pwd_com());
-	if (!ft_strcmp(cmd->com, "export"))
-		return (export_com(cmd, env));
-	if (!ft_strcmp(cmd->com, "unset"))
-		return (unset_com(cmd, env));
-	if (!ft_strcmp(cmd->com, "env"))
-		return (env_com(env->list));
-	// if (!ft_strcmp(cmd->com, "exit"))
+	if (!ft_strcmp(data->cmd->com, "export"))
+		return (export_com(data->cmd, data->env));
+	if (!ft_strcmp(data->cmd->com, "unset"))
+		return (unset_com(data->cmd, data->env));
+	if (!ft_strcmp(data->cmd->com, "env"))
+		return (env_com(data->env->list));
+	if (!ft_strcmp(cmd->com, "exit"))
+		
 	return (-1);
 }
 
-void	child(t_commands *cmd, t_dllist *env, int old_in, pid_t *pip)
+void	child(t_data *data, int old_in, pid_t *pip)
 {
 	int	b;
 
@@ -92,17 +93,17 @@ void	child(t_commands *cmd, t_dllist *env, int old_in, pid_t *pip)
 		dup2(old_in, STDIN_FILENO);
 		close(old_in);
 	}
-	if (cmd->next)
+	if (data->cmd->next)
 		dup2(pip[1], STDOUT_FILENO);
 	close(pip[1]);
-	if (cmd->fd_check == 1)
-		setio(cmd);
-	else if (cmd->fd_check == -1)
+	if (data->cmd->fd_check == 1)
+		setio(data->cmd);
+	else if (data->cmd->fd_check == -1)
 		exit (1);
-	b = builtin_com(cmd, env);
+	b = builtin_com(data);
 	if (b != -1)
 		exit(b);
-	run_com(cmd, env);
+	run_com(data->cmd, data->env);
 }
 
 int	get_exit_status(pid_t pid)
@@ -131,24 +132,24 @@ int	fork_run(t_commands *cmd, t_dllist *env)
 	return (get_exit_status(pid));
 }
 
-int	single_exec(t_commands *cmd, t_dllist *env)
+int	single_exec(t_data *data)
 {
 	int	b;
 	int	o_stdin;
 	int	o_stdout;
 
-	if (cmd->fd_check == 1)
+	if (data->cmd->fd_check == 1)
 	{
 		o_stdin = dup(STDIN_FILENO);
 		o_stdout = dup(STDOUT_FILENO);
-		setio(cmd);
+		setio(data->cmd);
 	}
-	else if (cmd->fd_check == -1)
+	else if (data->cmd->fd_check == -1)
 		return (1);
-	b = builtin_com(cmd, env);
+	b = builtin_com(data);
 	if (b == -1)
-		b = fork_run(cmd, env);
-	if (cmd->fd_check)
+		b = fork_run(data->cmd, data->env);
+	if (data->cmd->fd_check)
 	{
 		dup2(o_stdout, STDOUT_FILENO);
 		dup2(o_stdin, STDIN_FILENO);
@@ -158,16 +159,16 @@ int	single_exec(t_commands *cmd, t_dllist *env)
 	return (b);
 }
 
-int	executor(t_commands *cmd, t_dllist *env)
+int	executor(t_data *data)
 {
 	pid_t	pid;
 	int		pip[2];
 	int		old_in;
 
 	old_in = -1;
-	if (!cmd->pipe)
-		return (single_exec(cmd, env));
-	while (cmd)
+	if (!data->cmd->pipe)
+		return (single_exec(data));
+	while (data->cmd)
 	{
 		if (pipe(pip) == -1)
 			return (FAILURE);
@@ -175,12 +176,12 @@ int	executor(t_commands *cmd, t_dllist *env)
 		if (pid == -1)
 			return (FAILURE);
 		if (!pid)
-			child(cmd, env, old_in, pip);
+			child(data, old_in, pip);
 		if (old_in != -1)
 			close(old_in);
 		old_in = pip[0];
 		close(pip[1]);
-		cmd = cmd->next;
+		data->cmd = data->cmd->next;
 	}
 	close(old_in);
 	return (get_exit_status(pid));

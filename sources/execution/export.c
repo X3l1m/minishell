@@ -197,9 +197,9 @@ int	export_com(t_commands *cmd, t_dllist *env)
 				return (FAILURE);
 		}
 		else
-			g_exit_code = cmd_err_msg("export", cmd->args[i], "not a valid identifier", 1);
+			g_exit = cmd_err_msg("export", cmd->args[i], "not a valid identifier", 1);
 	}
 	if (!cmd->args[1])
 		export_print(env);
-	return (g_exit_code);
+	return (g_exit);
 }

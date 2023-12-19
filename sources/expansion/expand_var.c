@@ -45,7 +45,7 @@ char	*get_val(t_data *data, t_token *temp, char *string)
 		value = get_evn_char(data->env, var);
 	}
 	else if (var && var[0] == '?')
-		value = ft_itoa(g_exit_code);
+		value = ft_itoa(g_exit);
 	else
 		value = NULL;
 	free_pointer(var);

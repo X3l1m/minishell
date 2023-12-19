@@ -6,7 +6,7 @@
 /*   By: Owen <Owen@student.codam.nl>                 +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/06/23 13:59:44 by Owen          #+#    #+#                 */
-/*   Updated: 2023/07/03 15:50:52 by rmaes         ########   odam.nl         */
+/*   Updated: 2023/12/11 05:03:25 by linux         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ void	reset(int	temp)
 {
 	(void)temp;
 	write (1, "\n", 1);
-	g_exit_code = 130;
+	g_exit = 130;
 	rl_on_new_line();
 	rl_replace_line("", 0);
 	rl_redisplay();

@@ -72,12 +72,8 @@ ENVP_FILES = envp.c
 ENVP_DIR = envp/
 ENVP_DF = $(addprefix $(ENVP_DIR), $(ENVP_FILES))
 
-ENDING_FILES = exit.c
-ENDING_DIR = ending/
-ENDING_DF =$(addprefix $(ENDING_DIR), $(ENDING_FILES))
-
 SOURCES_DIR = sources/
-FILES =	$(MAIN_DF) $(LEXER_DF) $(EXPANDER_DF) $(PARSING_DF) $(UTILS_DF) $(SIGNALS_DF) $(ENVP_DF) $(ENDING_DF) $(EXECUTOR_DF)
+FILES =	$(MAIN_DF) $(LEXER_DF) $(EXPANDER_DF) $(PARSING_DF) $(UTILS_DF) $(SIGNALS_DF) $(ENVP_DF) $(EXECUTOR_DF)
 SOURCES = $(addprefix $(SOURCES_DIR), $(FILES))
 
 #INCLUDES = includes -I/Users/rmaes/.brew/opt/readline/include

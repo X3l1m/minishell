@@ -23,7 +23,7 @@
 # define SUCCES			0
 # define FAILURE		1
 
-extern int		g_exit_code;
+extern int		g_exit;
 
 typedef enum e_token_type
 {
@@ -88,13 +88,13 @@ typedef struct s_data
 
 
 // executiom
-int			executor(t_commands *cmd, t_dllist *env);
+int			executor(t_data *data);
 char		*pathf(char *com, t_dllist *env);
 t_dlnode	*find_env(t_dllist *env, char *name);
 int			cd_com(t_commands *cmd);
 int			echo_com(t_commands *cmd);
 int			pwd_com(void);
-int			builtin_com(t_commands *cmd, t_dllist *env);
+int			builtin_com(t_data *data);
 int			err_msg(char *com, char *msg, int err_nm);
 int			update_evn(t_dllist *env);
 void		cpy_last(char *s1, char *s2, int start);
@@ -110,7 +110,6 @@ void		free_dub(char **str);
 
 void		init_data_fd(t_commands *cmd);
 int			mini_loop(t_data *data);
-void		exit_ms(t_data *data, int num);
 bool		init_data(t_data *data, char **env);
 void		free_pointer(void *pointer);
 void		free_data_fd(t_data_fd *io);

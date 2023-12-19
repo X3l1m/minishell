@@ -6,7 +6,7 @@
 /*   By: Owen <Owen@student.codam.nl>                 +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/04/19 20:42:45 by Owen          #+#    #+#                 */
-/*   Updated: 2023/07/03 15:51:03 by rmaes         ########   odam.nl         */
+/*   Updated: 2023/12/11 05:03:25 by linux         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,6 @@ bool	init_data(t_data *data, char **env)
 		return (NULL);
 	data->user_input = NULL;
 	data->cmd = NULL;
-	g_exit_code = 0;
+	g_exit = 0;
 	return (true);
 }
