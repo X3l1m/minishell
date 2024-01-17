@@ -1,26 +1,28 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <stdint.h>
+#include <limits.h>
 
-char *ilk(void)
+int main()
 {
-	char *dene = malloc(3);
-	return(dene);
-}
+	char str[100];  // 100 karakter uzunluğunda bir string tanımla
+	long long deger;
 
-void son(char **str)
-{
-	*str = malloc(5);
-	for (int i = 0; i < 4; i++)
-	{
-		*str[i] = 'a';
+	// Kullanıcıdan bir string al
+	printf("Bir sayi girin: ");
+	scanf("%s", str);
+
+	// Stringi long long türüne çevir
+	deger = atoll(str);
+	printf("%lld\n", deger);
+/* 	// Çevrilen değeri kontrol et
+	if (deger > LONG_MAX || deger < LONG_MIN) {
+		printf("Hata: Girdi, long veri tipinin sınırlarını aşıyor.\n");
+	} else {
+		printf("Girdi geçerli: %lld\n", deger);
 	}
-	*str[4] = 0;
-}
 
-
-int	main()
-{
-	char *str;
-	son(&str);
-	printf("%s\n", str);
+	return 0;*/
 }
+// 9223372036854775807
+// 18446744073709551616
