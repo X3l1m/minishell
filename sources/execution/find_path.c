@@ -25,7 +25,6 @@ char	*add_path(char *path, char *com, char c)
 	return (new);
 }
 
-
 char	*pathf(char *com, t_dllist *env)
 {
 	int			i;
