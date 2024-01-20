@@ -14,7 +14,8 @@ EXECUTOR_FILES =	executor.c\
 					find_path.c\
 					cd_com.c\
 					export.c\
-					unset_com.c
+					unset_com.c\
+					exit_com.c
 EXECUTOR_DIR = execution/
 EXECUTOR_DF = $(addprefix $(EXECUTOR_DIR), $(EXECUTOR_FILES))
 

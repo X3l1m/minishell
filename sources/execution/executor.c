@@ -78,8 +78,8 @@ int	builtin_com(t_data *data)
 		return (unset_com(data->cmd, data->env));
 	if (!ft_strcmp(data->cmd->com, "env"))
 		return (env_com(data->env->list));
-	// if (!ft_strcmp(cmd->com, "exit"))
-		
+	if (!ft_strcmp(data->cmd->com, "exit"))
+		return (exit_com(data));
 	return (-1);
 }
 

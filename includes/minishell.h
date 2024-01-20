@@ -105,7 +105,7 @@ char		*get_evn_char(t_dllist *env, char *var);
 int			error_mini(char *errmsg, int num);
 int			replace_var(t_token *list, char *var, int index);
 void		free_dub(char **str);
-
+int			exit_com(t_data *data);
 
 
 void		init_data_fd(t_commands *cmd);
