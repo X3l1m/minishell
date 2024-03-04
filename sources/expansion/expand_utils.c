@@ -36,7 +36,7 @@ void	string_init(char *new, char *string, int index, int i)
 		if (s == index)
 			s += i;
 		if (!string[s])
-			break;
+			break ;
 		new[len] = string[s];
 		s++;
 		len++;
@@ -72,7 +72,7 @@ static bool	erase_replace_var(t_token *list, char *string,
 	new = get_new_string(string, var, len, index);
 	if (!new)
 		return (false);
-	if (list )
+	if (list)
 	{
 		free_pointer(list->string);
 		list->string = new;
@@ -84,12 +84,12 @@ int	replace_var(t_token *list, char *var, int index)
 {
 	if (var == NULL)
 	{
-		if(!erase_var(list, list->string, index))
+		if (!erase_var(list, list->string, index))
 			return (error_mini("Malloc(expand_utils: 78)", 1));
 	}
 	else
 	{
-		if(!erase_replace_var(list, list->string, var, index))
+		if (!erase_replace_var(list, list->string, var, index))
 			return (error_mini("Malloc(expand_utils: 83)", 1));
 	}
 	free_pointer(var);

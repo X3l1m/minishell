@@ -1,19 +1,5 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        ::::::::            */
-/*   error.c                                            :+:    :+:            */
-/*                                                     +:+                    */
-/*   By: rmaes <rmaes@student.codam.nl>               +#+                     */
-/*                                                   +#+                      */
-/*   Created: 2023/06/05 16:50:47 by rmaes         #+#    #+#                 */
-/*   Updated: 2023/07/03 15:51:00 by rmaes         ########   odam.nl         */
-/*                                                                            */
-/* ************************************************************************** */
-
 #include <minishell.h>
 
-//if num is -1 program will exit with exit code 1
-//if num exist return num after error message
 int	error_mini(char *errmsg, int num)
 {
 	ft_putstr_fd("Error\n", STDERR_FILENO);
@@ -24,7 +10,7 @@ int	error_mini(char *errmsg, int num)
 	if (num < 0)
 		exit(EXIT_FAILURE);
 	else
-		return(num);
+		return (num);
 }
 
 static bool	need_quotes(char *cmd)
@@ -71,7 +57,8 @@ int	cmd_err_msg(char *command, char *info, char *msg, int err)
 
 bool	print_error_msg(char *str)
 {
-	ft_putstr_fd("minishell: syntax error near unexpected token '", STDERR_FILENO);
+	ft_putstr_fd("minishell: syntax error near unexpected token '",
+		STDERR_FILENO);
 	ft_putstr_fd(str, STDERR_FILENO);
 	ft_putstr_fd("'\n", STDERR_FILENO);
 	return (false);

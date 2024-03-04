@@ -9,7 +9,6 @@ void	change_status_quote(t_token **list, int *i)
 	(*i)++;
 }
 
-/*Not sure this works the way I want it to*/
 bool	change_status_default(t_token **list, int *i)
 {
 	if (((*list)->string[*i] == '\'' && (*list)->status == S_QUOTES)
@@ -34,5 +33,4 @@ void	sort_strings(t_token **list, char *new)
 {
 	free_pointer((*list)->string);
 	(*list)->string = new;
-	//(*list)->join = true;
 }

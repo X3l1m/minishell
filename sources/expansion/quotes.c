@@ -33,19 +33,18 @@ int	count_length(char *string, int count, int i)
 bool	remove_quotes(t_token **list)
 {
 	char	*new;
-	int		len;
 	int		i;
 	int		j;
 
 	i = 0;
 	j = 0;
-	len = count_length((*list)->string, 0, 0);
-	new = (char *)malloc(sizeof(char) * len + 1);
+	new = malloc(count_length((*list)->string, 0, 0) + 1);
 	if (!new)
 		return (false);
 	while ((*list)->string[i])
 	{
-		if (((*list)->string[i] == '\'' || (*list)->string[i] == '\"') && (*list)->status == DEFAULT)
+		if (((*list)->string[i] == '\''
+				|| (*list)->string[i] == '\"') && (*list)->status == DEFAULT)
 		{
 			change_status_quote(list, &i);
 			continue ;

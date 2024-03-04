@@ -32,7 +32,7 @@ void	cmd_split_var(t_commands *cmd, char *string)
 	i = 2;
 	while (words[i++])
 		lst_add_back_tkn(&new, new_token(ft_strdup(words[i]), 
-			NULL, WORD, DEFAULT));
+				NULL, WORD, DEFAULT));
 	lst_add_back_tkn(&new, new_token(NULL, NULL, END, DEFAULT));
 	process_args(&new, cmd);
 	lst_clear_tkn(&temp, &free_pointer);
@@ -55,7 +55,8 @@ void	parse_word(t_commands **cmd, t_token **list)
 			{
 				cmd_split_var(last, temp->string);
 			}
-			else if ((temp->string && temp->string[0]) || (temp->next->type != WORD && temp->next->type != VAR))
+			else if ((temp->string && temp->string[0])
+				|| (temp->next->type != WORD && temp->next->type != VAR))
 			{
 				last->com = ft_strdup(temp->string);
 			}

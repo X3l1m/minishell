@@ -1,5 +1,8 @@
 #include <minishell.h>
 
+#define EOF_ERR "error, unexpected EOF while looking for matching \""
+#define EOF_ERR1 "error, unexpected EOF while looking for matching \'"
+
 int	set_status(int status, char *str, int i)
 {
 	if (str[i] == '\'' && status == DEFAULT)
@@ -33,9 +36,9 @@ int	tokenizer(t_data *data, char *str)
 	if (status != DEFAULT)
 	{
 		if (status == D_QUOTES)
-			ft_putendl_fd("error, unexpected EOF while looking for matching \"", STDERR_FILENO);
+			ft_putendl_fd(EOF_ERR, STDERR_FILENO);
 		if (status == S_QUOTES)
-			ft_putendl_fd("error, unexpected EOF while looking for matching \'", STDERR_FILENO);
+			ft_putendl_fd(EOF_ERR1, STDERR_FILENO);
 		return (FAILURE);
 	}
 	return (SUCCES);

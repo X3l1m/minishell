@@ -21,7 +21,8 @@ void	parse_trunc(t_commands **cmd, t_token **list)
 	last = lst_last_cmd(*cmd);
 	temp = *list;
 	init_data_fd(last);
-	last->fd_check = handle_trunc(last->fd_data, temp->next->string, temp->next->string_cpy);
+	last->fd_check = handle_trunc(last->fd_data,
+			temp->next->string, temp->next->string_cpy);
 	if (temp->next->next)
 		temp = temp->next->next;
 	else

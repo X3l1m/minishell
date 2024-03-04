@@ -1,9 +1,6 @@
 #include <minishell.h>
-#include <stdlib.h>
-#include <stdio.h>
 
-
-char **split_one(char *str, char c)
+char	**split_one(char *str, char c)
 {
 	int		i;
 	int		len;
@@ -12,7 +9,7 @@ char **split_one(char *str, char c)
 
 	i = 0;
 	len = ft_strlen(str);
-	new = ft_calloc(sizeof(char*), 3);
+	new = ft_calloc(sizeof(char *), 3);
 	if (!new)
 		error_mini(("Mallloc (envp: 29)"), -1);
 	while (str[i] != c)
@@ -30,7 +27,6 @@ char **split_one(char *str, char c)
 		new[1][len2] = str[--len];
 	return (new);
 }
-
 
 t_dllist	*envcpy(char **envp)
 {

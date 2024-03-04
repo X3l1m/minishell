@@ -1,19 +1,6 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        ::::::::            */
-/*   signals.c                                          :+:    :+:            */
-/*                                                     +:+                    */
-/*   By: Owen <Owen@student.codam.nl>                 +#+                     */
-/*                                                   +#+                      */
-/*   Created: 2023/06/23 13:59:44 by Owen          #+#    #+#                 */
-/*   Updated: 2023/12/11 05:03:25 by linux         ########   odam.nl         */
-/*                                                                            */
-/* ************************************************************************** */
-
 #include <minishell.h>
 
-/*Resets the readline user input prompt*/
-void	reset(int	temp)
+void	reset(int temp)
 {
 	(void)temp;
 	write (1, "\n", 1);
@@ -23,7 +10,6 @@ void	reset(int	temp)
 	rl_redisplay();
 }
 
-/*Prints a newline when a signal is caught*/
 void	s_newline(int signal)
 {
 	(void)signal;

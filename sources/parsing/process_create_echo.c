@@ -6,7 +6,7 @@
 /*   By: Owen <Owen@student.codam.nl>                 +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/06/30 08:44:51 by Owen          #+#    #+#                 */
-/*   Updated: 2023/06/30 16:48:30 by Owen          ########   odam.nl         */
+/*   Updated: 2024/03/02 19:15:30 by linux         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,7 @@ char	*merge_vars(t_token **list)
 	temp = *list;
 	string = ft_strdup(temp->string);
 	while ((temp->type == VAR && temp->next->type == VAR)
-			|| (temp->join && temp->next->join))
+		|| (temp->join && temp->next->join))
 	{
 		string = join_str(string, temp->next->string);
 		temp = temp->next;

@@ -1,15 +1,3 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        ::::::::            */
-/*   init_data.c                                        :+:    :+:            */
-/*                                                     +:+                    */
-/*   By: Owen <Owen@student.codam.nl>                 +#+                     */
-/*                                                   +#+                      */
-/*   Created: 2023/04/19 20:42:45 by Owen          #+#    #+#                 */
-/*   Updated: 2023/12/11 05:03:25 by linux         ########   odam.nl         */
-/*                                                                            */
-/* ************************************************************************** */
-
 #include <minishell.h>
 
 void	init_data_fd(t_commands *cmd)
@@ -51,7 +39,6 @@ bool	init_data(t_data *data, char **env)
 	data->env = envcpy(env);
 	add_shlvl(data->env);
 	update_evn(data->env);
-	// data->env->list = env;
 	if (!data->env)
 		return (NULL);
 	data->user_input = NULL;
