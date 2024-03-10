@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        ::::::::            */
+/*   parse_data.c                                       :+:    :+:            */
+/*                                                     +:+                    */
+/*   By: seyildir <seyildir@student.codam.nl>         +#+                     */
+/*                                                   +#+                      */
+/*   Created: 2024/03/04 12:47:06 by linux         #+#    #+#                 */
+/*   Updated: 2024/03/09 00:29:42 by seyildir      ########   odam.nl         */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include <minishell.h>
 
 void	handle_pipe(t_commands **cmds, t_token **list)
@@ -10,27 +22,21 @@ void	handle_pipe(t_commands **cmds, t_token **list)
 	*list = (*list)->next;
 }
 
-static int	check_commands_empty(t_data *data)
+int	check_commands_empty(t_data *data)
 {
 	t_commands	*cmd;
 
-	if (!data || !data->cmd)
-	{
-		if (!data)
-			printf("no data\n");
-		else if (!data->cmd)
-			printf("no cmd\n");
-		return (SUCCES);
-	}
 	cmd = data->cmd;
 	while (cmd && cmd->com)
 	{
 		if (!cmd->args)
 		{
 			cmd->args = malloc(sizeof * cmd->args * 2);
+			if (!cmd->args)
+				return (error_mini("Malloc(parse_data: 35)", 1));
 			cmd->args[0] = ft_strdup(cmd->com);
 			if (!cmd->args[0])
-				return (error_mini("ft_split(parse_data: 46)", 1));
+				return (error_mini("Malloc(parse_data: 39)", 1));
 			cmd->args[1] = NULL;
 		}
 		cmd = cmd->next;

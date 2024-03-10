@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        ::::::::            */
+/*   export.c                                           :+:    :+:            */
+/*                                                     +:+                    */
+/*   By: seyildir <seyildir@student.codam.nl>         +#+                     */
+/*                                                   +#+                      */
+/*   Created: 2024/03/04 13:03:31 by seyildir      #+#    #+#                 */
+/*   Updated: 2024/03/06 14:28:46 by seyildir      ########   odam.nl         */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include <minishell.h>
 
 void	free_dub(char **str)
@@ -24,6 +36,7 @@ char	*connect_with(char *s1, char c, char *s2)
 	int		len1;
 	int		len2;
 	char	*new;
+
 	len1 = ft_strlen(s1) + 1;
 	if (s2)
 		len2 = ft_strlen(s2);
@@ -38,6 +51,7 @@ char	*connect_with(char *s1, char c, char *s2)
 	new[len1 + len2] = 0;
 	return (new);
 }
+
 int	init_char_env(t_dllist *env, t_dlnode *tmp)
 {
 	int	i;
@@ -75,7 +89,7 @@ int	update_evn(t_dllist *env)
 			env_len++;
 		env->head = env->head->next;
 	}
-	env->list = malloc(sizeof(char*) * (env_len + 1));
+	env->list = malloc(sizeof(char *) * (env_len + 1));
 	if (!env->list)
 		return (error_mini("Malloc(export: 61)", 1));
 	return (init_char_env(env, env->head));
@@ -115,7 +129,7 @@ t_dlnode	*find_env(t_dllist *env, char *name)
 			return (tmp);
 		tmp = tmp->next;
 	}
-	return(NULL);
+	return (NULL);
 }
 
 int	check_valid(char *str)
@@ -132,7 +146,7 @@ int	check_valid(char *str)
 		if (!ft_isalnum(str[v]) && str[v] != '_')
 			return (-1);
 	}
-	return(0);
+	return (0);
 }
 
 int	cpy_var(t_dllist *env, char *name, char *value)
@@ -197,7 +211,8 @@ int	export_com(t_commands *cmd, t_dllist *env)
 				return (FAILURE);
 		}
 		else
-			g_exit = cmd_err_msg("export", cmd->args[i], "not a valid identifier", 1);
+			g_exit = cmd_err_msg("export",
+					cmd->args[i], "not a valid identifier", 1);
 	}
 	if (!cmd->args[1])
 		export_print(env);

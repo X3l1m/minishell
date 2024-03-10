@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        ::::::::            */
+/*   parse_append.c                                     :+:    :+:            */
+/*                                                     +:+                    */
+/*   By: seyildir <seyildir@student.codam.nl>         +#+                     */
+/*                                                   +#+                      */
+/*   Created: 2024/03/04 13:02:47 by seyildir      #+#    #+#                 */
+/*   Updated: 2024/03/04 13:02:48 by seyildir      ########   odam.nl         */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include <minishell.h>
 
 static int	handle_append(t_data_fd *io, char *filename, char *o_filename)

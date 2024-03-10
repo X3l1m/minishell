@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        ::::::::            */
+/*   token_list.c                                       :+:    :+:            */
+/*                                                     +:+                    */
+/*   By: seyildir <seyildir@student.codam.nl>         +#+                     */
+/*                                                   +#+                      */
+/*   Created: 2024/03/04 13:03:05 by seyildir      #+#    #+#                 */
+/*   Updated: 2024/03/04 13:03:06 by seyildir      ########   odam.nl         */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include <minishell.h>
 
 t_token	*new_token(char *str, char *str_cpy, int type, int status)

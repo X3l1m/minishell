@@ -63,6 +63,8 @@
     "string.h": "c",
     "random": "c",
     "limits": "c",
-    "algorithm": "c"
+    "algorithm": "c",
+    "stdlib.h": "c",
+    "cdl_list.h": "c"
   }
 }

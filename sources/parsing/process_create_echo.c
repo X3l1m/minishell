@@ -3,10 +3,10 @@
 /*                                                        ::::::::            */
 /*   process_create_echo.c                              :+:    :+:            */
 /*                                                     +:+                    */
-/*   By: Owen <Owen@student.codam.nl>                 +#+                     */
+/*   By: seyildir <seyildir@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/06/30 08:44:51 by Owen          #+#    #+#                 */
-/*   Updated: 2024/03/02 19:15:30 by linux         ########   odam.nl         */
+/*   Updated: 2024/03/04 13:00:03 by seyildir      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 

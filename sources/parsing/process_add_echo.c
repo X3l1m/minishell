@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        ::::::::            */
+/*   process_add_echo.c                                 :+:    :+:            */
+/*                                                     +:+                    */
+/*   By: seyildir <seyildir@student.codam.nl>         +#+                     */
+/*                                                   +#+                      */
+/*   Created: 2024/03/04 13:00:05 by seyildir      #+#    #+#                 */
+/*   Updated: 2024/03/04 13:00:06 by seyildir      ########   odam.nl         */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include <minishell.h>
 
 char	**merge_into_array(int i, char **words, t_commands *cmd, t_token *temp)

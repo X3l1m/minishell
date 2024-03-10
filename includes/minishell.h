@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        ::::::::            */
+/*   minishell.h                                        :+:    :+:            */
+/*                                                     +:+                    */
+/*   By: seyildir <seyildir@student.codam.nl>         +#+                     */
+/*                                                   +#+                      */
+/*   Created: 2024/03/04 13:04:32 by seyildir      #+#    #+#                 */
+/*   Updated: 2024/03/04 13:07:11 by seyildir      ########   odam.nl         */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef MINISHELL_H
 # define MINISHELL_H
 
@@ -86,7 +98,6 @@ typedef struct s_data
 	t_commands	*cmd;
 }		t_data;
 
-
 // executiom
 int			executor(t_data *data);
 char		*pathf(char *com, t_dllist *env);
@@ -106,8 +117,6 @@ int			error_mini(char *errmsg, int num);
 int			replace_var(t_token *list, char *var, int index);
 void		free_dub(char **str);
 int			exit_com(t_data *data);
-
-
 void		init_data_fd(t_commands *cmd);
 int			mini_loop(t_data *data);
 bool		init_data(t_data *data, char **env);
