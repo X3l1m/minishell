@@ -18,7 +18,7 @@ void	loop(t_data *data)
 {
 	while (1)
 	{
-		set_signals_interactive();
+		set_signals_interactive(0);
 		data->user_input = readline("\033[0;35mminishell$\033[0m ");
 		set_signals_noninteractive();
 		if (parse_input_str(data))

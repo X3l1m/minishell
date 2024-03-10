@@ -28,24 +28,42 @@ void	s_newline(int signal)
 	rl_on_new_line();
 }
 
-void	set_signals_interactive(void)
+void	exit_heredoc(int temp)
+{
+	(void)temp;
+	g_exit++;
+	write (1, "\n", 1);
+	rl_on_new_line();
+	rl_replace_line("", 0);
+	// rl_redisplay();
+}
+
+void	set_signals_interactive(int heredoc)
 {
 	if (signal(SIGQUIT, SIG_IGN) == SIG_ERR)
-		perror("signal36");
-	if (signal(SIGINT, reset) == SIG_ERR)
-		perror("signal38");
+		perror("signal 40");
+	if (heredoc)
+	{
+		if (signal(SIGINT, exit_heredoc) == SIG_ERR)
+			perror("signal 44");
+	}
+	else
+	{
+		if (signal(SIGINT, reset) == SIG_ERR)
+			perror("signal 49");
+	}
 }
 
 void	set_signals_noninteractive(void)
 {
 	if (signal(SIGINT, s_newline) == SIG_ERR)
 	{
-		perror("signal45");
+		perror("signal 57");
 		exit(FAILURE);
 	}
 	if (signal(SIGQUIT, s_newline) == SIG_ERR)
 	{
-		perror("signal50");
+		perror("signal 62");
 		exit(FAILURE);
 	}
 }

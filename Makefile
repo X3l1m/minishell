@@ -77,8 +77,7 @@ PARSING_DIR = parsing/
 PARSING_DF = $(addprefix $(PARSING_DIR), $(PARSING_FILES))
 
 #signal files
-SIGNAL_FILES =		loop.c\
-					signals.c
+SIGNAL_FILES =		signals.c
 SIGNAL_DIR = signals/
 SIGNALS_DF = $(addprefix $(SIGNAL_DIR), $(SIGNAL_FILES))
 

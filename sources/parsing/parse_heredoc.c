@@ -16,16 +16,21 @@ bool	fill_heredoc(t_data *data, t_data_fd *io, int fd)
 {
 	char	*input;
 	bool	success;
+	int		gback;
 
+	gback = g_exit;
 	success = false;
 	input = NULL;
 	while (true)
 	{
-		set_signals_interactive();
+		set_signals_interactive(1);
 		input = readline(">");
 		set_signals_noninteractive();
-		if (check_line_hd(data, io, &input, &success) == false)
+		if (g_exit != gback || !check_line_hd(data, io, &input, &success))
+		{
+			g_exit = gback;
 			break ;
+		}
 		ft_putendl_fd(input, fd);
 		free_pointer(input);
 	}

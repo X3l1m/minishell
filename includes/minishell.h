@@ -126,7 +126,7 @@ void		free_str_arr(char **arr);
 char		*join_str(char *str, char *add);
 void		lst_delone_cmd(t_commands *list, void (*del)(void *));
 void		lst_clear_cmd(t_commands **list, void (*del)(void *));
-void		set_signals_interactive(void);
+void		set_signals_interactive(int heredoc);
 void		set_signals_noninteractive(void);
 int			parse_input_str(t_data *data);
 int			tokenizer(t_data *data, char *str);
