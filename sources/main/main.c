@@ -14,6 +14,24 @@
 
 int	g_exit = 0;
 
+void	loop(t_data *data)
+{
+	while (1)
+	{
+		set_signals_interactive();
+		data->user_input = readline("\033[0;35mminishell$\033[0m ");
+		set_signals_noninteractive();
+		if (parse_input_str(data))
+		{
+			g_exit = 1;
+			ft_putendl_fd("Parse error!", STDERR_FILENO);
+		}
+		else if (data->cmd)
+			g_exit = executor(data);
+		free_data(data, false);
+	}
+}
+
 int	main(int ac, char **av, char **env)
 {
 	t_data	data;
@@ -23,6 +41,6 @@ int	main(int ac, char **av, char **env)
 	ft_memset(&data, 0, sizeof(t_data));
 	if (!init_data(&data, env))
 		exit(1);
-	mini_loop(&data);
+	loop(&data);
 	return (0);
 }

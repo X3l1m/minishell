@@ -42,7 +42,7 @@ char	*get_evn_char(t_dllist *env, char *var)
 	t_dlnode	*tmp;
 
 	tmp = find_env(env, var);
-	if (!tmp)
+	if (!tmp || !tmp->value)
 		return (NULL);
 	return (ft_strdup(tmp->value));
 }
@@ -52,7 +52,7 @@ bool	valid_var(t_data *data, char *var)
 	t_dlnode	*temp;
 
 	temp = find_env(data->env, var);
-	if (temp == NULL)
+	if (!temp || !temp->value)
 		return (false);
 	return (true);
 }

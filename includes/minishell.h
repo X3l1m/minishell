@@ -118,7 +118,6 @@ int			replace_var(t_token *list, char *var, int index);
 void		free_dub(char **str);
 int			exit_com(t_data *data);
 void		init_data_fd(t_commands *cmd);
-int			mini_loop(t_data *data);
 bool		init_data(t_data *data, char **env);
 void		free_pointer(void *pointer);
 void		free_data_fd(t_data_fd *io);

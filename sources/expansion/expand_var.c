@@ -84,7 +84,7 @@ int	expand_var(t_data *data, t_token **list)
 				if (replace_var(temp, get_val(data, temp, temp->string + i), i))
 					return (FAILURE);
 			}
-			if (temp->string[i])
+			else if (temp->string[i])
 				i++;
 		}
 		temp = temp->next;
