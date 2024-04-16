@@ -21,6 +21,16 @@ void	free_pointer(void *pointer)
 	}
 }
 
+void	free_dub(char **str)
+{
+	int	i;
+
+	i = 0;
+	while (str[i])
+		free(str[i++]);
+	free(str);
+}
+
 void	free_str_arr(char **arr)
 {
 	int	i;

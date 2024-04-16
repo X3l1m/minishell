@@ -99,6 +99,9 @@ typedef struct s_data
 }		t_data;
 
 // executiom
+int			run_com(t_commands *cmd, t_dllist *env);
+int			find_char(char *str, char c);
+void		setio(t_commands *cmd);
 int			executor(t_data *data);
 char		*pathf(char *com, t_dllist *env);
 t_dlnode	*find_env(t_dllist *env, char *name);
@@ -117,6 +120,7 @@ int			error_mini(char *errmsg, int num);
 int			replace_var(t_token *list, char *var, int index);
 void		free_dub(char **str);
 int			exit_com(t_data *data);
+void		export_print(t_dllist *env);
 void		init_data_fd(t_commands *cmd);
 bool		init_data(t_data *data, char **env);
 void		free_pointer(void *pointer);

@@ -12,6 +12,14 @@
 
 #include <minishell.h>
 
+int	find_char(char *str, char c)
+{
+	while (*str)
+		if (*str++ == c)
+			return (1);
+	return (0);
+}
+
 int	check_n(char **str)
 {
 	int	i;

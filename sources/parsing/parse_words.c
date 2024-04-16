@@ -43,7 +43,7 @@ void	cmd_split_var(t_commands *cmd, char *string)
 	temp = new;
 	i = 2;
 	while (words[i++])
-		lst_add_back_tkn(&new, new_token(ft_strdup(words[i]), 
+		lst_add_back_tkn(&new, new_token(ft_strdup(words[i]),
 				NULL, WORD, DEFAULT));
 	lst_add_back_tkn(&new, new_token(NULL, NULL, END, DEFAULT));
 	process_args(&new, cmd);

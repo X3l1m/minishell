@@ -35,7 +35,6 @@ void	exit_heredoc(int temp)
 	write (1, "\n", 1);
 	rl_on_new_line();
 	rl_replace_line("", 0);
-	// rl_redisplay();
 }
 
 void	set_signals_interactive(int heredoc)

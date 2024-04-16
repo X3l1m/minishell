@@ -23,13 +23,15 @@ MAIN_DIR = main/
 MAIN_DF = $(addprefix $(MAIN_DIR), $(MAIN_FILES))
 
 EXECUTOR_FILES =	executor.c\
+					executor2.c\
 					find_path.c\
 					cd_com.c\
 					export.c\
 					unset_com.c\
 					exit_com.c\
 					echo_com.c\
-					pwd_com.c
+					pwd_com.c\
+					export_com.c
 EXECUTOR_DIR = execution/
 EXECUTOR_DF = $(addprefix $(EXECUTOR_DIR), $(EXECUTOR_FILES))
 
