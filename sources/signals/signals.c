@@ -32,9 +32,10 @@ void	exit_heredoc(int temp)
 {
 	(void)temp;
 	g_exit++;
-	write (1, "\n", 1);
+	exit(130);
+/* 	write (1, "\n", 1);
 	rl_on_new_line();
-	rl_replace_line("", 0);
+	rl_replace_line("", 0); */
 }
 
 void	set_signals_interactive(int heredoc)

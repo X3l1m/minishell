@@ -26,7 +26,7 @@ all: $(OBJECTS_DIR) $(NAME)
 
 $(NAME): $(OBJECTS) 
 	@echo "compiling: $(YELLOW)creating library$(DEFAULT)"
-	@ar -rcsu $@ $^
+	@ar -rc $@ $^
 	@echo "$(GREEN)$@ successfully compiled!$(DEFAULT)"
 
 $(OBJECTS_DIR):

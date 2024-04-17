@@ -57,14 +57,16 @@
   "C_Cpp_Runner.useLinkTimeOptimization": false,
   "C_Cpp_Runner.msvcSecureNoWarnings": false,
   "files.associations": {
-    "minishell.h": "c",
-    "errno.h": "c",
-    "error.h": "c",
-    "string.h": "c",
-    "random": "c",
-    "limits": "c",
-    "algorithm": "c",
-    "stdlib.h": "c",
-    "cdl_list.h": "c"
-  }
+	"minishell.h": "c",
+	"errno.h": "c",
+	"error.h": "c",
+	"string.h": "c",
+	"random": "c",
+	"limits": "c",
+	"algorithm": "c",
+	"stdlib.h": "c",
+	"cdl_list.h": "c",
+	"signal.h": "c",
+	"limits.h": "c"
+}
 }

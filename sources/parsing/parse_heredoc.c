@@ -26,7 +26,7 @@ bool	fill_heredoc(t_data *data, t_data_fd *io, int fd)
 		set_signals_interactive(1);
 		input = readline(">");
 		set_signals_noninteractive();
-		if (g_exit != gback || !check_line_hd(data, io, &input, &success))
+		if (gback != g_exit || !check_line_hd(data, io, &input, &success))
 		{
 			g_exit = gback;
 			break ;
@@ -40,14 +40,22 @@ bool	fill_heredoc(t_data *data, t_data_fd *io, int fd)
 
 bool	build_heredoc(t_data *data, t_data_fd *io)
 {
-	bool	ret;
+	// bool	ret;
 	int		temp_fd;
 
-	ret = true;
-	temp_fd = open(io->infile, O_CREAT | O_WRONLY | O_TRUNC, 0644);
-	ret = fill_heredoc(data, io, temp_fd);
-	close(temp_fd);
-	return (ret);
+	pid_t pid;
+	pid = fork();
+	if(pid == -1)
+		return(false);
+	if(!pid)
+	{
+		temp_fd = open(io->infile, O_CREAT | O_WRONLY | O_TRUNC, 0644);
+		fill_heredoc(data, io, temp_fd);
+		close(temp_fd);
+		exit(0);
+	}
+	wait(NULL);
+	return (true);
 }
 
 void	parse_heredoc(t_data *data, t_commands **last_cmd, t_token **list)
