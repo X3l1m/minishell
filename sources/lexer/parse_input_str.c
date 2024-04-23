@@ -34,6 +34,8 @@ void	last_com(t_commands *cmd, t_dllist *env)
 	char		*last;
 	t_dlnode	*tmp;
 
+	if (!cmd || !env)
+		return ;
 	i = -1;
 	tmp = find_env(env, "_");
 	if (!tmp)

@@ -44,30 +44,40 @@ int	check_commands_empty(t_data *data)
 	return (SUCCES);
 }
 
+bool	parse_loop(t_token **temp, t_token **token, t_data **data, bool *ret)
+{
+	if (*temp == *token)
+		lst_add_back_cmd(&(*data)->cmd, lst_new_command(false));
+	if ((*temp)->type == HEREDOC)
+		*ret = parse_heredoc(*data, &(*data)->cmd, &(*temp));
+	else if ((*temp)->type == WORD || (*temp)->type == VAR)
+		parse_word(&(*data)->cmd, &(*temp));
+	else if ((*temp)->type == INPUT)
+		parse_input(&(*data)->cmd, &(*temp));
+	else if ((*temp)->type == TRUNC)
+		parse_trunc(&(*data)->cmd, &(*temp));
+	else if ((*temp)->type == APPEND)
+		parse_append(&(*data)->cmd, &(*temp));
+	else if ((*temp)->type == PIPE)
+		handle_pipe(&(*data)->cmd, &(*temp));
+	else if ((*temp)->type == END)
+		return (false);
+	return (true);
+}
+
 void	parse_data(t_data *data, t_token *token)
 {
 	t_token	*temp;
+	bool	ret;
 
+	ret = true;
 	temp = token;
 	while (temp->next != NULL)
 	{
-		if (temp == token)
-			lst_add_back_cmd(&data->cmd, lst_new_command(false));
-		if (temp->type == HEREDOC)
-			parse_heredoc(data, &data->cmd, &temp);
-		else if (temp->type == WORD || temp->type == VAR)
-			parse_word(&data->cmd, &temp);
-		else if (temp->type == INPUT)
-			parse_input(&data->cmd, &temp);
-		else if (temp->type == TRUNC)
-			parse_trunc(&data->cmd, &temp);
-		else if (temp->type == APPEND)
-			parse_append(&data->cmd, &temp);
-		else if (temp->type == PIPE)
-			handle_pipe(&data->cmd, &temp);
-		else if (temp->type == END)
+		if (!parse_loop(&temp, &token, &data, &ret))
 			break ;
+		if (!ret)
+			return ;
 	}
 	check_commands_empty(data);
-	return ;
 }

@@ -8,8 +8,8 @@
       "args": [],
       "stopAtEntry": false,
       "externalConsole": false,
-      "cwd": "/home/selinux/minishell",
-      "program": "/home/selinux/minishell/minishell",
+      "cwd": "/home/linux/minishell",
+      "program": "/home/linux/minishell/minishell",
       "MIMode": "gdb",
       "miDebuggerPath": "gdb",
       "setupCommands": [

@@ -40,25 +40,43 @@ bool	fill_heredoc(t_data *data, t_data_fd *io, int fd)
 
 bool	build_heredoc(t_data *data, t_data_fd *io)
 {
-	// bool	ret;
+	pid_t	pid;
+	bool	ret;
 	int		temp_fd;
 
-	pid_t pid;
 	pid = fork();
-	if(pid == -1)
-		return(false);
-	if(!pid)
+	if (pid == -1)
+		return (false);
+	if (!pid)
 	{
 		temp_fd = open(io->infile, O_CREAT | O_WRONLY | O_TRUNC, 0644);
-		fill_heredoc(data, io, temp_fd);
+		ret = fill_heredoc(data, io, temp_fd);
 		close(temp_fd);
+		if (!ret)
+			exit(-1);
 		exit(0);
 	}
-	wait(NULL);
+	g_exit = get_exit_status(pid);
+	if (g_exit)
+	{
+		if (g_exit == -1)
+			g_exit = 0;
+		return (false);
+	}
 	return (true);
 }
 
-void	parse_heredoc(t_data *data, t_commands **last_cmd, t_token **list)
+bool	check_exit(t_commands **cmd)
+{
+	if (g_exit == 130)
+	{
+		lst_clear_cmd(cmd, &free_pointer);
+		return (false);
+	}
+	return (true);
+}
+
+bool	parse_heredoc(t_data *data, t_commands **last_cmd, t_token **list)
 {
 	t_token		*temp;
 	t_commands	*cmd;
@@ -69,7 +87,7 @@ void	parse_heredoc(t_data *data, t_commands **last_cmd, t_token **list)
 	init_data_fd(cmd);
 	io = cmd->fd_data;
 	if (!remove_old_ref(io, true))
-		return ;
+		return (true);
 	io->infile = get_heredoc_name();
 	io->delim_hd = get_delim_hd(temp->next->string, io->quotes_hd);
 	if (build_heredoc(data, io))
@@ -82,4 +100,5 @@ void	parse_heredoc(t_data *data, t_commands **last_cmd, t_token **list)
 		temp = temp->next;
 	*list = temp;
 	unlink(io->infile);
+	return (check_exit(last_cmd));
 }

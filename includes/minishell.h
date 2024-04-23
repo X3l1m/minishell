@@ -101,6 +101,7 @@ typedef struct s_data
 // executiom
 int			run_com(t_commands *cmd, t_dllist *env);
 int			find_char(char *str, char c);
+int			get_exit_status(pid_t pid);
 void		setio(t_commands *cmd);
 int			executor(t_data *data);
 char		*pathf(char *com, t_dllist *env);
@@ -145,7 +146,7 @@ t_commands	*lst_new_command(bool pipe);
 void		lst_add_back_cmd(t_commands **list, t_commands *new);
 t_commands	*lst_last_cmd(t_commands *list);
 bool		process_args(t_token **list, t_commands *cmd);
-void		parse_heredoc(t_data *data, t_commands **last_cmd, t_token **list);
+bool		parse_heredoc(t_data *data, t_commands **last_cmd, t_token **list);
 void		parse_word(t_commands **cmd, t_token **list);
 void		parse_input(t_commands **cmd, t_token **list);
 void		parse_trunc(t_commands **cmd, t_token **list);
