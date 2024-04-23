@@ -98,7 +98,6 @@ typedef struct s_data
 	t_commands	*cmd;
 }		t_data;
 
-// executiom
 int			run_com(t_commands *cmd, t_dllist *env);
 int			find_char(char *str, char c);
 int			get_exit_status(pid_t pid);
