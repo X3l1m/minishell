@@ -16,6 +16,8 @@ int	g_exit = 0;
 
 void	loop(t_data *data)
 {
+	t_commands	*tmp;
+
 	while (1)
 	{
 		set_signals_interactive(0);
@@ -27,7 +29,11 @@ void	loop(t_data *data)
 			ft_putendl_fd("Parse error!", STDERR_FILENO);
 		}
 		else if (data->cmd)
+		{
+			tmp = data->cmd;
 			g_exit = executor(data);
+			data->cmd = tmp;
+		}
 		free_data(data, false);
 	}
 }
