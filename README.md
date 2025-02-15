@@ -13,6 +13,7 @@ Minishell is a simple Unix shell implementation written in C. It simulates the f
 ## Requirements
 
 - **C Compiler**: GCC or Clang
+- **Readline**: Uses the external GNU Readline library for handling input.
 - **Make**: For building the project
 - **Linux Environment**: Designed to work in Unix-like systems
 
