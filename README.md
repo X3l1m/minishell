@@ -21,7 +21,7 @@ Minishell is a simple Unix shell implementation written in C. It simulates the f
 ### 1. Clone the Repository
 
 ```bash
-git clone https://github.com/yourusername/minishell.git
+git clone https://github.com/X3l1m/minishell.git
 cd minishell
 ```
 
